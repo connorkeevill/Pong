@@ -10,22 +10,34 @@ white = (255, 255, 255)
 grey = (162, 153, 145)
 darkGrey = (62, 53, 45)
 
+# IMPROVE: Use a class and draw these instead of using images
 ball = pygame.image.load("images/Pong ball.png")
 paddle1 = pygame.image.load("images/Pong Paddle.png")
 paddle2 = pygame.image.load("images/Pong Paddle.png")
+
+# | Set size for display
 dispWidth = 1366
 dispHeight = 700
+
+# | Initial position for the ball
 ballx = dispWidth / 2
 bally = dispHeight / 2
+
+# | Create the display
 setDisplay = pygame.display.set_mode((dispWidth, dispHeight))
 
+# | Initial heights for the paddles
 paddle1y = 300
 paddle2y = 300
 
 # Screen Text:
 
+# IMPROVE: These are the same
+
 leftScoreFont = pygame.font.Font("freesansbold.ttf", 120)
 rightScoreFont = pygame.font.Font("freesansbold.ttf", 120)
+
+# IMPROVE: Make this more dynamic; don't hard code each score but concatenate the integer to the string
 
 # Left Scores
 leftScoreText0 = leftScoreFont.render("0", True, white)
@@ -58,23 +70,30 @@ pongFont = pygame.font.Font("freesansbold.ttf", 150)
 playText = playFont.render("Play", True, white)
 pongText = pongFont.render("Pong", True, white)
 
+# IMPROVE: Use meaningful values, not just arbitrary numbers
 playBox = dispWidth / 2 - 150, dispHeight / 2 + 50
 pongBox = dispWidth / 2 - 190, 50
 
 leftScoreBox = 500, 10
 rightScoreBox = 800, 10
 
+# IMPROVE: What is this colour even for??
 playColour = darkGrey
 
+# IMPROVE: Maybe contain these in a player class or something
 leftScore = 0
 rightScore = 0
 
+# IMPROVE: Could change this to be a lot better
 game = 'Start'
 
+# IMPROVE: What do these do
 balldir = 'Left'
 Balldir = 'Still'
 
+# IMPROVE: Extract into a file that does this
 while True:
+    # IMPROVE: With classes
     while game == 'Start':
         mousex, mousey = pygame.mouse.get_pos()
         setDisplay.fill(black)
@@ -83,11 +102,13 @@ while True:
         setDisplay.blit(playText, playBox)
         pygame.display.flip()
 
+        # IMPROVE: Use events instead, that can check from a button class
         if dispWidth / 2 - 150 < mousex < (dispWidth / 2 - 150) + 305 and dispHeight / 2 + 55 < mousey < (
                 dispHeight / 2 + 55) + 145:
             playColour = grey
             for event in pygame.event.get():
                 if event.type == MOUSEBUTTONDOWN:
+                    # IMPROVE: Use a new window for this maybe
                     game = 'Play'
         else:
             playColour = darkGrey
@@ -99,6 +120,8 @@ while True:
 
     while game == 'Play':
         # Handling The Scores
+
+        # IMPROVE: Just add one to an integer value
         if leftScore == 0:
             setDisplay.blit(leftScoreText0, leftScoreBox)
         elif leftScore == 1:
@@ -156,6 +179,7 @@ while True:
         setDisplay.blit(ball, (ballx, bally))
         pygame.draw.line(setDisplay, white, (dispWidth / 2, 0), (dispWidth / 2, 700), 4)
 
+        # IMPROVE: Makke this easy to read
         az = pygame.key.get_pressed()
         km = pygame.key.get_pressed()
 
