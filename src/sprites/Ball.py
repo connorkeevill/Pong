@@ -4,9 +4,9 @@ import pygame
 pygame.init()
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, colour):
+    def __init__(self, colour=(255, 255, 255)):
         # | Call __init__() of the Sprite() class to inherit
-        pygame.sprite.Sprite.__init__(self)#
+        pygame.sprite.Sprite.__init__(self)
 
         # | Define how sprite should look, and the rect this should give it
         self.image = pygame.Surface((50, 50))

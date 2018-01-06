@@ -3,9 +3,8 @@
 import pygame
 from pygame.locals import *
 import sys
-from objects.Button import Button
-from objects.Title import Title
 from sprites.Ball import Ball
+from sprites.Paddle import Paddle
 
 pygame.init()
 
@@ -19,11 +18,13 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
 
-ball = Ball()
+ball = Ball(white)
+paddle = Paddle(red)
+
 
 sprites = pygame.sprite.Group()
 
-sprites.add(ball)
+sprites.add(ball, paddle)
 
 
 while True:
