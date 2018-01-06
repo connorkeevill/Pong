@@ -5,25 +5,39 @@ from pygame.locals import *
 import sys
 from objects.Button import Button
 from objects.Title import Title
+from sprites.Ball import Ball
 
 pygame.init()
 
 setDisplay = pygame.display.set_mode((300, 300))
 
+clock = pygame.time.Clock()
+FPS = 60
+
+black = (0, 0, 0)
+white = (255, 255, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
 
-bt = Button(setDisplay, 10, 10, 50, 50, red, green, "Hello")
-title = Title(setDisplay, 10, 40, "Hello There", 14, red)
+ball = Ball()
+
+sprites = pygame.sprite.Group()
+
+sprites.add(ball)
+
 
 while True:
-    bt.draw()
-    title.draw()
+    clock.tick(FPS)
+
+    setDisplay.fill(black)
+
+    sprites.update()
+    sprites.draw(setDisplay)
+
+
+
+
     pygame.display.update()
-
-    xmouse, ymouse = pygame.mouse.get_pos()
-
-    bt.hover(xmouse, ymouse)
 
     for event in pygame.event.get():
         if event.type == QUIT:
