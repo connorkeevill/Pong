@@ -19,3 +19,11 @@ class Title():
         font = pygame.font.SysFont("Century Gothic", size)
         text = font.render(text, False, self.colour)
         return text
+
+    def changeText(self, newText, newSize=-1):
+        if newSize < 0:
+            newSize = self.size
+
+        text = self.createText(newText, newSize)
+
+        self.text = text
