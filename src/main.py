@@ -3,44 +3,31 @@
 import pygame
 from pygame.locals import *
 import sys
+from pages.MainMenu import MainMenu
 from sprites.Ball import Ball
 from sprites.Paddle import Paddle
 
 pygame.init()
 
-setDisplay = pygame.display.set_mode((300, 300))
+screen = pygame.display.set_mode((700, 600))
 
 clock = pygame.time.Clock()
 FPS = 60
 
-black = (0, 0, 0)
-white = (255, 255, 255)
-red = (255, 0, 0)
-green = (0, 255, 0)
+pages = {"MainMenu": MainMenu(screen)}
 
-ball = Ball(white)
-paddle = Paddle(red)
-
-
-sprites = pygame.sprite.Group()
-
-sprites.add(ball, paddle)
-
+page = "MainMenu"
 
 while True:
     clock.tick(FPS)
 
-    setDisplay.fill(black)
-
-    sprites.update()
-    sprites.draw(setDisplay)
-
-
-
+    pages[page].draw()
 
     pygame.display.update()
 
     for event in pygame.event.get():
+        pages[page].handleEvent(event)
+
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
