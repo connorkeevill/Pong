@@ -10,6 +10,7 @@ from sprites.Paddle import Paddle
 pygame.init()
 
 screen = pygame.display.set_mode((700, 600))
+pygame.display.set_caption("Pong")
 
 clock = pygame.time.Clock()
 FPS = 60

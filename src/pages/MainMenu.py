@@ -9,13 +9,20 @@ class MainMenu():
 
         def __init__(self, surface):
             self.surface = surface
-            self.btnPlay = Button(self.surface, self.surface.get_width()/2, self.surface.get_height()/2, 200, 75, colours.white, colours.red, "Play", colours.black)
+            self.btnPlay = Button(350, 300, [400, 150], colours.red, colours.blue, "Play")
 
+        # | draw()
+        # |---------------------------------------------
+        # | Draws all items on the page to the surface
+        # |----------------------------------------
         def draw(self):
-            self.btnPlay.draw()
+            self.btnPlay.draw(self.surface)
 
+        # | handleEvent()
+        # |---------------------------------------------------------------------
+        # | Takes an event to determine what action can be taken to handle it
+        # |---------------------------------------------------------------
         def handleEvent(self, event):
             if event.type == pygame.MOUSEMOTION:
                 xMouse, yMouse = pygame.mouse.get_pos()
                 self.btnPlay.hover(xMouse, yMouse)
-
