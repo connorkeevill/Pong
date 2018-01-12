@@ -3,6 +3,7 @@
 import pygame
 
 from objects.Button import Button
+from objects.Title import Title
 from resources import colours
 
 class MainMenu():
@@ -10,12 +11,14 @@ class MainMenu():
         def __init__(self, surface):
             self.surface = surface
 
-
-            # | Create the button to be the play button
+            # | Create Play Button
             btnPlayDimensions = {"width":300, "height":100}
             btnPlayXpos = 450
             btnPlayYpos = 450
             self.btnPlay = Button(btnPlayXpos, btnPlayYpos, btnPlayDimensions, colours.red, colours.blue, "Play")
+
+            # | Create Title
+            self.ttlPong = Title(20, 10, "Pong", 76)
 
         # | draw()
         # |---------------------------------------------
@@ -23,6 +26,7 @@ class MainMenu():
         # |----------------------------------------
         def draw(self):
             self.btnPlay.draw(self.surface)
+            self.ttlPong.draw(self.surface)
 
         # | handleEvent()
         # |---------------------------------------------------------------------

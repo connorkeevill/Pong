@@ -3,8 +3,7 @@
 import pygame
 
 class Title():
-    def __init__(self, surface, xPos, yPos, text, size, colour=(255, 255, 255)):
-        self.surface = surface
+    def __init__(self, xPos, yPos, text, size, colour=(255, 255, 255)):
         self.xPos = xPos
         self.yPos = yPos
         self.size = size
@@ -12,8 +11,8 @@ class Title():
 
         self.text = self.createText(text, size)
 
-    def draw(self):
-        self.surface.blit(self.text, (self.xPos, self.yPos))
+    def draw(self, surface):
+        surface.blit(self.text, (self.xPos, self.yPos))
 
     def createText(self, text, size):
         font = pygame.font.SysFont("Century Gothic", size)
