@@ -9,6 +9,8 @@ class MainMenu():
 
         def __init__(self, surface):
             self.surface = surface
+
+            # | Create the button to be the play button
             self.btnPlay = Button(350, 300, [400, 150], colours.red, colours.blue, "Play")
 
         # | draw()
@@ -23,6 +25,19 @@ class MainMenu():
         # | Takes an event to determine what action can be taken to handle it
         # |---------------------------------------------------------------
         def handleEvent(self, event):
+            # | The action to tell the main.py file what to do (if required)
+            action = None
+
+            # | Mouse motion events; allows for the hovering of buttons
             if event.type == pygame.MOUSEMOTION:
                 xMouse, yMouse = pygame.mouse.get_pos()
                 self.btnPlay.hover(xMouse, yMouse)
+
+            # | Clicking events; for clicking on buttons
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if self.btnPlay.clicked():
+                    action = "GamePlay"
+
+            # | Return the action
+            return action
+

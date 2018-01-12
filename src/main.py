@@ -3,9 +3,9 @@
 import pygame
 from pygame.locals import *
 import sys
+import Helpers
+
 from pages.MainMenu import MainMenu
-from sprites.Ball import Ball
-from sprites.Paddle import Paddle
 
 pygame.init()
 
@@ -20,6 +20,7 @@ pages = {"MainMenu": MainMenu(screen)}
 page = "MainMenu"
 
 while True:
+    action = None
     clock.tick(FPS)
 
     pages[page].draw()
@@ -27,8 +28,9 @@ while True:
     pygame.display.update()
 
     for event in pygame.event.get():
-        pages[page].handleEvent(event)
+        action = pages[page].handleEvent(event)
 
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+        Helpers.checkForQuit(event)
+
+        if action == "GamePlay":
+            print("Change to game page")

@@ -7,7 +7,7 @@ from pygame.locals import *
 # | Button()
 # |---------------------------------------------------
 # | Class for a button. Handles it's position, size
-# | colours, text, drawing and mouse hovering
+# | colours, text, drawing, hovering and clicks
 # |--------------------------------------
 class Button():
     def __init__(self, xPos, yPos, dimensions, colour, hoverColour, text=False, textColour=(255, 255, 255)):
@@ -16,20 +16,18 @@ class Button():
         self.colour = colour
         self.hoverColour = hoverColour
         self.textColour = textColour
-        self.text = self.createText(text)
+        self.text = self.createText(text, 15)
 
-        self.hover = False
+        # | Define the colour that'll be used to when drawing the button
+        self.drawColour = colour
+
+        # | Instantiate needed attributes for button
+        self.isHovering = False
         self.xPos = None
         self.yPos = None
 
+        # | Position the button
         self.positionAboutCentre(xPos, yPos)
-
-        # |--------------------------------------------------------------------------------
-        # | The colour that'll be used when the button is drawn. It is separate from the
-        # | hoverColour and colour to allow hoveing to take place without modifying
-        # | the original colours of the button; to preserve the class attributes
-        # |-----------------------------------------------------------------
-        self.drawColour = colour
 
     # | positionAboutCentre()
     # |-----------------------------------------------------------
@@ -45,9 +43,13 @@ class Button():
         self.xPos = horizontalCentre
         self.yPos = veritcalCentre
 
-
-    def createText(self, text):
-        size = 15
+    # | createText()
+    # |------------------------------------
+    # | Returns a text object that can be
+    # | blitted to a a display, taking
+    # | the text and size as params
+    # |------------------------
+    def createText(self, text, size):
         font = pygame.font.SysFont("Century Gothic", size)
         text = font.render(text, False, self.textColour)
         return text
@@ -80,6 +82,10 @@ class Button():
             self.drawColour = self.colour
             self.isHovering = False
 
-    def click(self):
-        if self.isHovering:
-            return True
+    # | click()
+    # |-------------------------------------------------
+    # | Uses the isHovering flag from self.hover() to
+    # | determine if a click was above the button
+    # |--------------------------------------
+    def clicked(self):
+        return self.isHovering
