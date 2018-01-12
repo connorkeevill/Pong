@@ -35,8 +35,8 @@ class Button():
     # | passed, by subtracting half the width and height
     # |--------------------------------------------
     def positionAboutCentre(self, xPos, yPos):
-        width = self.dimensions[0]
-        height = self.dimensions[1]
+        width = self.dimensions["width"]
+        height = self.dimensions["height"]
         horizontalCentre = xPos - (width / 2)
         veritcalCentre = yPos - (height / 2)
 
@@ -59,8 +59,8 @@ class Button():
     # | Draws the button at it's location, on it's surface, in it's colour
     # |---------------------------------------------------------------
     def draw(self, surface):
-        width = self.dimensions[0]
-        height = self.dimensions[1]
+        width = self.dimensions["width"]
+        height = self.dimensions["height"]
         pygame.draw.rect(surface, self.drawColour, (self.xPos, self.yPos, width, height))
         surface.blit(self.text, (self.xPos, self.yPos))
 
@@ -70,8 +70,8 @@ class Button():
     # | changes the drawColour accordingly if it is
     # |-----------------------------------------
     def hover(self, xMouse, yMouse):
-        width = self.dimensions[0]
-        height = self.dimensions[1]
+        width = self.dimensions["width"]
+        height = self.dimensions["height"]
         horizontalRange = self.xPos <= xMouse <= (self.xPos + width)
         verticalRange = self.yPos <= yMouse <= (self.yPos + height)
 

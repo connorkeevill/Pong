@@ -10,8 +10,12 @@ class MainMenu():
         def __init__(self, surface):
             self.surface = surface
 
+
             # | Create the button to be the play button
-            self.btnPlay = Button(350, 300, [400, 150], colours.red, colours.blue, "Play")
+            btnPlayDimensions = {"width":300, "height":100}
+            btnPlayXpos = 450
+            btnPlayYpos = 450
+            self.btnPlay = Button(btnPlayXpos, btnPlayYpos, btnPlayDimensions, colours.red, colours.blue, "Play")
 
         # | draw()
         # |---------------------------------------------

@@ -9,7 +9,7 @@ from pages.MainMenu import MainMenu
 
 pygame.init()
 
-screen = pygame.display.set_mode((700, 600))
+screen = pygame.display.set_mode((900, 600))
 pygame.display.set_caption("Pong")
 
 clock = pygame.time.Clock()
