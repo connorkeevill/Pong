@@ -1,8 +1,7 @@
 # CK
 
 import pygame
-pygame.init()
-from pygame.locals import *
+import Helpers
 
 # | Button()
 # |---------------------------------------------------
@@ -16,7 +15,7 @@ class Button():
         self.colour = colour
         self.hoverColour = hoverColour
         self.textColour = textColour
-        self.text = self.createText(text, 15)
+        self.text = Helpers.createText(text, 15, self.textColour)
 
         # | Define the colour that'll be used to when drawing the button
         self.drawColour = colour
@@ -42,17 +41,6 @@ class Button():
 
         self.xPos = horizontalCentre
         self.yPos = veritcalCentre
-
-    # | createText()
-    # |------------------------------------
-    # | Returns a text object that can be
-    # | blitted to a a display, taking
-    # | the text and size as params
-    # |------------------------
-    def createText(self, text, size):
-        font = pygame.font.SysFont("Century Gothic", size)
-        text = font.render(text, False, self.textColour)
-        return text
 
     # | draw()
     # |----------------------------------------------------------------------
