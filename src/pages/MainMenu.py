@@ -18,7 +18,9 @@ class MainMenu():
             self.btnPlay = Button(btnPlayXpos, btnPlayYpos, btnPlayDimensions, colours.red, colours.blue, "Play")
 
             # | Create Title
-            self.ttlPong = Title(20, 10, "Pong", 76)
+            ttlPongXpos = 450
+            ttlPongYpos = 200
+            self.ttlPong = Title(ttlPongXpos, ttlPongYpos, "Pong", 121)
 
         # | draw()
         # |---------------------------------------------
