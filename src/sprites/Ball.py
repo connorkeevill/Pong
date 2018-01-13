@@ -8,20 +8,27 @@ class Ball(pygame.sprite.Sprite):
         # | Call __init__() of the Sprite() class to inherit
         pygame.sprite.Sprite.__init__(self)
 
-        # | Define how sprite should look, and the rect this should give it
-        self.image = pygame.Surface((40, 40))
-        self.image.fill((colour))
-        self.rect = self.image.get_rect()
+        # | Create the rect for the ball
+        self.rect = pygame.Rect(xPos, yPos, 40, 40)
 
-        # | Place it here while testing
+        self.colour = colour
+
+        # |Position the ball
         self.rect.centerx = xPos
         self.rect.centery = yPos
+
+        self.xVelocity = 5
+        self.yVelocity = 0
+
+    def draw(self, surface):
+        pygame.draw.rect(surface, self.colour, self.rect)
 
     def update(self):
         self.move()
 
     def move(self):
-        self.rect.x += 5
-        if self.rect.left > 300:
-            self.rect.right = 0
+        self.rect.centerx += self.xVelocity
+        self.rect.centery += self.yVelocity
 
+    def changeDirection(self):
+        self.xVelocity *= -1

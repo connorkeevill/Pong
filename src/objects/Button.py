@@ -3,6 +3,8 @@
 import pygame
 import Helpers
 
+pygame.init()
+
 # | Button()
 # |---------------------------------------------------
 # | Class for a button. Handles it's position, size

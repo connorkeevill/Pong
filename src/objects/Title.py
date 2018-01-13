@@ -1,7 +1,6 @@
 #CK
 
 import Helpers
-import pygame
 
 class Title():
     def __init__(self, xPos, yPos, text, size, colour=(255, 255, 255)):

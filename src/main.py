@@ -1,12 +1,8 @@
 #CK
 
 import pygame
-from pygame.locals import *
-import sys
 import Helpers
-
 from resources import colours
-
 from pages.MainMenu import MainMenu
 from pages.GamePlay import GamePlay
 
@@ -15,29 +11,26 @@ pygame.init()
 screen = pygame.display.set_mode((900, 600))
 pygame.display.set_caption("Pong")
 
-clock = pygame.time.Clock()
 FPS = 60
+clock = pygame.time.Clock()
 
 pages = {"MainMenu": MainMenu(screen),
          "GamePlay": GamePlay(screen)}
 
-page = "MainMenu"
+page = pages["MainMenu"]
 
 while True:
     screen.fill(colours.black)
 
-    action = None
-    clock.tick(FPS)
-
-    pages[page].draw()
-
-    pygame.display.update()
+    page.update()
+    page.draw()
 
     for event in pygame.event.get():
-        action = pages[page].handleEvent(event)
+        action = page.handleEvent(event)
+        if action == "GamePlay":
+            page = pages[action]
 
         Helpers.checkForQuit(event)
 
-        if action == "GamePlay":
-            page = action
-            print("Change to game page")
+    pygame.display.update()
+    clock.tick(FPS)

@@ -6,6 +6,8 @@ from objects.Button import Button
 from objects.Title import Title
 from resources import colours
 
+pygame.init()
+
 class MainMenu():
 
         def __init__(self, surface):
@@ -21,6 +23,13 @@ class MainMenu():
             ttlPongXpos = 450
             ttlPongYpos = 200
             self.ttlPong = Title(ttlPongXpos, ttlPongYpos, "Pong", 121)
+
+        # | update()
+        # |------------------------------------------------
+        # | To be added to parent class when implemented
+        # |------------------------------------------
+        def update(self):
+            None
 
         # | draw()
         # |---------------------------------------------
