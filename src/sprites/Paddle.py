@@ -29,3 +29,10 @@ class Paddle(pygame.sprite.Sprite):
     # |------------------
     def moveUp(self):
         self.rect.y -= 3
+
+    # | moveDown()
+    # |------------------------
+    # | Moves the paddle down
+    # |--------------------
+    def moveDown(self):
+        self.rect.y += 3

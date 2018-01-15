@@ -32,6 +32,8 @@ class GamePlay(Page):
         keyPresses = pygame.key.get_pressed()
         if keyPresses[pygame.K_k]:
             self.rightPaddle.moveUp()
+        if keyPresses[pygame.K_m]:
+            self.rightPaddle.moveDown()
 
         self.ball.move()
 
