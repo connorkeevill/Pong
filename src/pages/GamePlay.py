@@ -1,22 +1,21 @@
 #CK
 
 import pygame
-
 from sprites.Paddle import Paddle
 from sprites.Ball import Ball
-
 from resources import colours
+from pages.Page import Page
 
-class GamePlay():
+class GamePlay(Page):
     def __init__(self, surface):
-        self.surface = surface
+        Page.__init__(self, surface)
 
         # | Create the ball and paddles
         self.ball = Ball(450, 100, colours.white)
         self.leftPaddle = Paddle(100, 100, colours.white)
         self.rightPaddle = Paddle(800, 100, colours.white)
 
-        self.objects = [self.ball, self.leftPaddle, self.rightPaddle]
+        self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle])
 
     # | update()
     # |--------------------------------------------------
@@ -30,14 +29,6 @@ class GamePlay():
             self.ball.changeDirection()
 
         self.ball.move()
-
-    # | draw()
-    # |-----------------------------------------------
-    # | Draws all objects on the page to the surface
-    # |------------------------------------------
-    def draw(self):
-        for object in self.objects:
-            object.draw(self.surface)
 
     # | handleEvent()
     # |---------------------------------------------------------------------

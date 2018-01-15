@@ -6,12 +6,13 @@ from objects.Button import Button
 from objects.Title import Title
 from resources import colours
 
+from pages.Page import Page
+
 pygame.init()
 
-class MainMenu():
-
+class MainMenu(Page):
         def __init__(self, surface):
-            self.surface = surface
+            Page.__init__(self, surface)
 
             # | Create Play Button
             btnPlayDimensions = {"width":300, "height":100}
@@ -24,20 +25,7 @@ class MainMenu():
             ttlPongYpos = 200
             self.ttlPong = Title(ttlPongXpos, ttlPongYpos, "Pong", 121)
 
-        # | update()
-        # |------------------------------------------------
-        # | To be added to parent class when implemented
-        # |------------------------------------------
-        def update(self):
-            None
-
-        # | draw()
-        # |---------------------------------------------
-        # | Draws all items on the page to the surface
-        # |----------------------------------------
-        def draw(self):
-            self.btnPlay.draw(self.surface)
-            self.ttlPong.draw(self.surface)
+            self.addToObjects([self.btnPlay, self.ttlPong])
 
         # | handleEvent()
         # |---------------------------------------------------------------------
