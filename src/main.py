@@ -28,6 +28,7 @@ while True:
     for event in pygame.event.get():
         action = page.handleEvent(event)
         if action == "GamePlay":
+            print("Change")
             page = pages[action]
 
         Helpers.checkForQuit(event)

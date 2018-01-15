@@ -10,49 +10,36 @@ pygame.init()
 # | Class for a button. Handles it's position, size
 # | colours, text, drawing, hovering and clicks
 # |--------------------------------------
-class Button():
+class Button(pygame.sprite.Sprite):
     def __init__(self, xPos, yPos, dimensions, colour, hoverColour, text=False, textColour=(255, 255, 255)):
+        pygame.sprite.Sprite.__init__(self)
+
         # | Assign passed variables
-        self.dimensions = dimensions
+        self.rect = pygame.Rect(xPos, yPos, dimensions["width"], dimensions["height"])
+        self.rect.centerx = xPos
+        self.rect.centery = yPos
+
+        # | Define colours
         self.colour = colour
         self.hoverColour = hoverColour
+        self.drawColour = colour
+
+        # | Define text stuff
         self.textColour = textColour
         self.text = Helpers.createText(text, 15, self.textColour)
-
-        # | Define the colour that'll be used to when drawing the button
-        self.drawColour = colour
 
         # | Instantiate needed attributes for button
         self.isHovering = False
         self.xPos = None
         self.yPos = None
 
-        # | Position the button
-        self.positionAboutCentre(xPos, yPos)
-
-    # | positionAboutCentre()
-    # |-----------------------------------------------------------
-    # | Puts the centre of the button on the x and y positions
-    # | passed, by subtracting half the width and height
-    # |--------------------------------------------
-    def positionAboutCentre(self, xPos, yPos):
-        width = self.dimensions["width"]
-        height = self.dimensions["height"]
-        horizontalCentre = xPos - (width / 2)
-        veritcalCentre = yPos - (height / 2)
-
-        self.xPos = horizontalCentre
-        self.yPos = veritcalCentre
-
     # | draw()
     # |----------------------------------------------------------------------
     # | Draws the button at it's location, on it's surface, in it's colour
     # |---------------------------------------------------------------
     def draw(self, surface):
-        width = self.dimensions["width"]
-        height = self.dimensions["height"]
-        pygame.draw.rect(surface, self.drawColour, (self.xPos, self.yPos, width, height))
-        surface.blit(self.text, (self.xPos, self.yPos))
+        pygame.draw.rect(surface, self.drawColour, self.rect)
+        surface.blit(self.text, (self.rect.x, self.rect.y))
 
     # | hover()
     # |-------------------------------------------------
@@ -60,17 +47,12 @@ class Button():
     # | changes the drawColour accordingly if it is
     # |-----------------------------------------
     def hover(self, xMouse, yMouse):
-        width = self.dimensions["width"]
-        height = self.dimensions["height"]
-        horizontalRange = self.xPos <= xMouse <= (self.xPos + width)
-        verticalRange = self.yPos <= yMouse <= (self.yPos + height)
+        self.isHovering = self.rect.collidepoint(xMouse, yMouse)
 
-        if horizontalRange and verticalRange:
+        if self.isHovering:
             self.drawColour = self.hoverColour
-            self.isHovering = True
         else:
             self.drawColour = self.colour
-            self.isHovering = False
 
     # | click()
     # |-------------------------------------------------
