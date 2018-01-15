@@ -26,8 +26,12 @@ class GamePlay(Page):
     # | be ran each loop of the game
     # |------------------------
     def update(self):
-        if self.ballBounce():
-            self.ball.changeDirection()
+        if self.ballBounceOnPaddle():
+            self.ball.changeDirectionX()
+
+        keyPresses = pygame.key.get_pressed()
+        if keyPresses[pygame.K_k]:
+            self.rightPaddle.moveUp()
 
         self.ball.move()
 
@@ -37,7 +41,8 @@ class GamePlay(Page):
     # |---------------------------------------------------------------
     def handleEvent(self, event):
         action = None
-        # | Insert code here
+
+
 
         return action
 
@@ -45,5 +50,5 @@ class GamePlay(Page):
     # |--------------------------------------------------------------------
     # | Determines if the ball has collided (hence bounce) with a paddle
     # |-------------------------------------------------------------
-    def ballBounce(self):
+    def ballBounceOnPaddle(self):
         return self.ball.rect.colliderect(self.rightPaddle.rect) or self.ball.rect.colliderect(self.leftPaddle.rect)

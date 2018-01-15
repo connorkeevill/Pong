@@ -9,20 +9,23 @@ class Paddle(pygame.sprite.Sprite):
         # | Call __init__() method of Sprite() to inherit
         pygame.sprite.Sprite.__init__(self)
 
-        # | Create the rect for the paddle
+        # | Create the paddle's rect and position it
         self.rect = pygame.Rect(xPos, yPos, 30, 140)
-
-        self.colour = colour
-
-        # | Position the paddle
         self.rect.centerx = xPos
         self.rect.centery = yPos
 
+        self.colour = colour
+
+    # | draw()
+    # |-------------------
+    # | Draws the paddle
+    # |---------------
     def draw(self, surface):
         pygame.draw.rect(surface, self.colour, self.rect)
 
-    def update(self):
-        self.move()
-
-    def move(self):
-        None
+    # | moveUp()
+    # |-----------------------
+    # | Moves the paddle up
+    # |------------------
+    def moveUp(self):
+        self.rect.y -= 3
