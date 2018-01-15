@@ -15,13 +15,19 @@ class MainMenu(Page):
             # | Call the superclass __init__() method
             Page.__init__(self, surface)
 
-            # | Create Play Button
+            # | btnPlay
+            # |--------------------------------
+            # | Starts the game when clicked
+            # |--------------------------
             btnPlayDimensions = {"width":300, "height":100}
             btnPlayXpos = 450
             btnPlayYpos = 450
             self.btnPlay = Button(btnPlayXpos, btnPlayYpos, btnPlayDimensions, colours.red, colours.blue, "Play")
 
-            # | Create Title
+            # | ttlPong
+            # |-------------------------------------
+            # | The title to to introduce the game
+            # |-------------------------------
             ttlPongXpos = 450
             ttlPongYpos = 200
             self.ttlPong = Title(ttlPongXpos, ttlPongYpos, "Pong", 121)
