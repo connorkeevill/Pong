@@ -1,34 +1,28 @@
 #CK
 
 import Helpers
+import pygame
 
 class Title():
     def __init__(self, xPos, yPos, text, size, colour=(255, 255, 255)):
-        # | Assign params
-        self.xPos = xPos
-        self.yPos = yPos
+
+        # | Create text object
+        self.text = text
         self.size = size
         self.colour = colour
-
-        # | Get text object
         self.text = Helpers.createText(text, size, colour)
-        self.positionAboutCentre(xPos, yPos)
 
-    def positionAboutCentre(self, xPos, yPos):
-        width = self.text.get_width()
-        height = self.text.get_height()
-        horizontalCentre = xPos - (width / 2)
-        veritcalCentre = yPos - (height / 2)
-
-        self.xPos = horizontalCentre
-        self.yPos = veritcalCentre
+        # | Get the rect of the text and position
+        self.rect = self.text.get_rect()
+        self.rect.centerx = xPos
+        self.rect.centery = yPos
 
     # | draw()
     # |-------------------------------------
     # | Blits the text to a passed surface
     # |-------------------------------
     def draw(self, surface):
-        surface.blit(self.text, (self.xPos, self.yPos))
+        surface.blit(self.text, (self.rect.x, self.rect.y))
 
     # | changeText()
     # |---------------------------------
