@@ -12,6 +12,7 @@ pygame.init()
 
 class MainMenu(Page):
         def __init__(self, surface):
+            # | Call the superclass __init__() method
             Page.__init__(self, surface)
 
             # | Create Play Button

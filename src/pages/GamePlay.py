@@ -8,6 +8,7 @@ from pages.Page import Page
 
 class GamePlay(Page):
     def __init__(self, surface):
+        # | Call the superclass __init__() method
         Page.__init__(self, surface)
 
         # | Create the ball and paddles
