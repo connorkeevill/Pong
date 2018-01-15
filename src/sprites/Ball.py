@@ -1,7 +1,6 @@
 #CK
 
 import pygame
-pygame.init()
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self, xPos, yPos, colour=(255, 255, 255)):
@@ -20,15 +19,37 @@ class Ball(pygame.sprite.Sprite):
         self.xVelocity = 5
         self.yVelocity = 0
 
+    # | draw()
+    # |------------------
+    # | Draws the ball
+    # |-----------
     def draw(self, surface):
         pygame.draw.rect(surface, self.colour, self.rect)
 
-    def update(self):
-        self.move()
-
+    # | move()
+    # |--------------------------------------------------
+    # | Applies the ball's velocities to move the ball
+    # |--------------------------------------------
     def move(self):
         self.rect.centerx += self.xVelocity
         self.rect.centery += self.yVelocity
 
-    def changeDirection(self):
+    # | changeDirectionX()
+    # |---------------------------------------------
+    # | Changes the direction of the ball in the
+    # | x-axis by changing the sign of the
+    # | velocity. Allows the ball to
+    # | 'bounce' off collisions
+    # |-------------------
+    def changeDirectionX(self):
         self.xVelocity *= -1
+
+    # | changeDirectionY()
+    # |---------------------------------------------
+    # | Changes the direction of the ball in the
+    # | y-axis by changing the sign off the
+    # | velocity. Allows the ball to
+    # | 'bounce' off collisions
+    # |---------------------
+    def changeDirectoinY(self):
+        self.yVelocity *= -1
