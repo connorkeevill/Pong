@@ -10,11 +10,9 @@ pygame.init()
 # | Class for a button. Handles it's position, size
 # | colours, text, drawing, hovering and clicks
 # |--------------------------------------
-class Button(pygame.sprite.Sprite):
+class Button():
     def __init__(self, xPos, yPos, dimensions, colour, hoverColour, text=False, textColour=(255, 255, 255)):
-        pygame.sprite.Sprite.__init__(self)
-
-        # | Assign passed variables
+        # | Create rect and position button
         self.rect = pygame.Rect(xPos, yPos, dimensions["width"], dimensions["height"])
         self.rect.centerx = xPos
         self.rect.centery = yPos
