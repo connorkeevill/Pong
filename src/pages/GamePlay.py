@@ -35,6 +35,11 @@ class GamePlay(Page):
         if keyPresses[pygame.K_m]:
             self.rightPaddle.moveDown()
 
+        if keyPresses[pygame.K_a]:
+            self.leftPaddle.moveUp()
+        if keyPresses[pygame.K_z]:
+            self.leftPaddle.moveDown()
+
         self.ball.move()
 
     # | handleEvent()
@@ -43,8 +48,6 @@ class GamePlay(Page):
     # |---------------------------------------------------------------
     def handleEvent(self, event):
         action = None
-
-
 
         return action
 
