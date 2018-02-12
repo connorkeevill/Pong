@@ -28,11 +28,11 @@ class Paddle(pygame.sprite.Sprite):
     # | Moves the paddle up
     # |------------------
     def moveUp(self):
-        self.rect.y -= 3
+        self.rect.y -= 5
 
     # | moveDown()
     # |------------------------
     # | Moves the paddle down
     # |--------------------
     def moveDown(self):
-        self.rect.y += 3
+        self.rect.y += 5

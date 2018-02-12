@@ -17,7 +17,7 @@ class Ball(pygame.sprite.Sprite):
         self.rect.centery = yPos
 
         self.xVelocity = 5
-        self.yVelocity = 0
+        self.yVelocity = 10
 
     # | draw()
     # |------------------
@@ -51,5 +51,5 @@ class Ball(pygame.sprite.Sprite):
     # | velocity. Allows the ball to
     # | 'bounce' off collisions
     # |---------------------
-    def changeDirectoinY(self):
+    def changeDirectionY(self):
         self.yVelocity *= -1
