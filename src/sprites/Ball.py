@@ -16,8 +16,8 @@ class Ball(pygame.sprite.Sprite):
         self.rect.centerx = xPos
         self.rect.centery = yPos
 
-        self.xVelocity = 5
-        self.yVelocity = 10
+        self.xVelocity = 8
+        self.yVelocity = 0
 
     # | draw()
     # |------------------
@@ -53,3 +53,15 @@ class Ball(pygame.sprite.Sprite):
     # |---------------------
     def changeDirectionY(self):
         self.yVelocity *= -1
+
+    # | setYVelocity()
+    # |--------------------------------------------------------------
+    # | Takes a gradient for the ball to follow as input, and then,
+    # | using the ball's xVelocity, scales the gradient into
+    # | the yVelocity which will cause the ball to
+    # | move with the same gradient passed
+    # |-------------------------------
+    def setYVelocity(self, gradient):
+        # | Using the absolute value of the xVelocity to prevent negative values flipping the direction of motion
+        newVelocity = gradient * abs(self.xVelocity)
+        self.yVelocity = newVelocity
