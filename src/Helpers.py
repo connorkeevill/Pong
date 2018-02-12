@@ -25,3 +25,10 @@ def createText(text, size, colour):
     text = font.render(text, False, colour)
     return text
 
+# | midpoint()
+# |----------------------------------------------
+# | Returns the integer midpoint of two numbers
+# |------------------------------------------
+def midpoint(lower, upper):
+    return (lower + upper) // 2
+
