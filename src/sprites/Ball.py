@@ -34,25 +34,41 @@ class Ball(pygame.sprite.Sprite):
         self.rect.centerx += self.xVelocity
         self.rect.centery += self.yVelocity
 
-    # | changeDirectionX()
+    # | setHorizontalDirectionLeft()
+    # |----------------------------------------------------
+    # | Changes the ball's x velocity so that it's moving
+    # | left, providing that it isn't already doing so
     # |---------------------------------------------
-    # | Changes the direction of the ball in the
-    # | x-axis by changing the sign of the
-    # | velocity. Allows the ball to
-    # | 'bounce' off collisions
-    # |-------------------
-    def changeDirectionX(self):
-        self.xVelocity *= -1
+    def setHorizontalDirectionLeft(self):
+        if self.xVelocity > 0:
+            self.xVelocity *= -1
 
-    # | changeDirectionY()
+    # | setHorizontalDirectionLeftRight()
+    # |----------------------------------------------------
+    # | Changes the ball's x velocity so that it's moving
+    # | left, providing that it isn't already doing so
     # |---------------------------------------------
-    # | Changes the direction of the ball in the
-    # | y-axis by changing the sign off the
-    # | velocity. Allows the ball to
-    # | 'bounce' off collisions
-    # |---------------------
-    def changeDirectionY(self):
-        self.yVelocity *= -1
+    def setHorizontalDirectionRight(self):
+        if self.xVelocity < 0:
+            self.xVelocity *= -1
+
+    # | setVerticalDirectionUp()
+    # |----------------------------------------------
+    # | Changes the ball's y velocity so that it's
+    # | moving up, if it isn't already doing so
+    # |------------------------------------
+    def setVerticalDirectionUp(self):
+        if self.yVelocity > 0:
+            self.yVelocity *= -1
+
+    # | setVerticalDirectionDown()
+    # |---------------------------------------------
+    # | Changes the ball's y velocity so that it's
+    # | moving down if it isn't already doing so
+    # |--------------------------------------
+    def setVerticalDirectionDown(self):
+        if self.yVelocity < 0:
+            self.yVelocity *= -1
 
     # | setYVelocity()
     # |--------------------------------------------------------------

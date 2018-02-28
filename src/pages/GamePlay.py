@@ -31,12 +31,7 @@ class GamePlay(Page):
     # | be ran each loop of the game
     # |------------------------
     def update(self):
-        if self.ballBounceOnPaddle():
-            self.ball.changeDirectionX()
-            self.bounceBallOffPaddle()
-
-        if self.ballBounceOnBoarders():
-            self.ball.changeDirectionY()
+        self.manageBounces()
 
         if self.ballPastEdges():
             self.ball.rect.centerx = Helpers.midpoint(0, self.surface.get_width())
@@ -46,6 +41,18 @@ class GamePlay(Page):
             self.movePaddles()
 
         self.ball.move()
+
+    # | manageBounces()
+    # |-----------------------------------------------------
+    # | Manages collisions for the ball to allow "bounces"
+    # |------------------------------------------------
+    def manageBounces(self):
+        # | Paddle bounces
+        if self.ballHasBouncedOnPaddle():
+            self.bounceBallOffPaddle()
+
+        # | Boundary bounces
+        self.bounceBallOffBoarder()
 
     # | movePaddles()
     # |-----------------------------------------------------
@@ -85,14 +92,18 @@ class GamePlay(Page):
     # |------------------------------------------------------------------------
     # | Determines whether the ball has collided (hence bounce) with a paddle
     # |-------------------------------------------------------------------
-    def ballBounceOnPaddle(self):
+    def ballHasBouncedOnPaddle(self):
         return self.ball.rect.colliderect(self.rightPaddle.rect) or self.ball.rect.colliderect(self.leftPaddle.rect)
 
     # | bounceBallOffPaddle()
     # |-----------------------------------------------------------------
-    # | Calculates the angle at which the ball should leave the paddle
-    # |-------------------------------------------------------------
+    # | Calculates the angle at which the ball should leave the paddle,
+    # | and changes the lateral direction of ball motion to bounce
+    # |-------------------------------------------------------
     def bounceBallOffPaddle(self):
+        # | Change the ball's lateral direction of motion
+        self.setBallDirection()
+
         # | Variable to store a reference to the paddle that the ball hit
         collidedPaddle = None
 
@@ -115,6 +126,33 @@ class GamePlay(Page):
         # | Sets the angle that the ball leaves the paddle with
         self.ball.setYVelocity(gradient)
 
+    def setBallDirection(self):
+        # | Because this method will only be called when a collision has occured with a paddle, we can just check one side
+        ballCollidedWithLeftPaddle = self.ball.rect.centerx < Helpers.midpoint(0, self.surface.get_width())
+
+        # | If the ball hit the left paddle, bounce right
+        if ballCollidedWithLeftPaddle:
+            self.ball.setHorizontalDirectionRight()
+        # | Otherwise, bounce left
+        else:
+            self.ball.setHorizontalDirectionLeft()
+
+    # | bounceBallOffBoarder()
+    # |-------------------------------------------------
+    # | Bounces checks for a collision between the ball
+    # | and the upper and lower boarders of the game
+    # | and changes the ball's vertical direction
+    # | to make the ball bounce off the boarder
+    # |--------------------------------------
+    def bounceBallOffBoarder(self):
+        ballHasCollidedWithTop = self.ball.rect.top <= 0
+        ballHasCollidedWithBottom = self.ball.rect.bottom >= self.surface.get_height()
+
+        if ballHasCollidedWithTop:
+            self.ball.setVerticalDirectionDown()
+        elif ballHasCollidedWithBottom:
+            self.ball.setVerticalDirectionUp()
+
     # | ballPastEdges()
     # |------------------------------------------------------------------
     # | Determines whether the ball has left the horizontal bounds of
@@ -129,5 +167,5 @@ class GamePlay(Page):
     # | Determines whether the ball is in contact with either the top of the
     # | bottom of the display, allowing it to "bounce" within the bounds
     # |------------------------------------------------------------
-    def ballBounceOnBoarders(self):
+    def ballHasBouncedOnBoarders(self):
         return self.ball.rect.top <= 0 or self.ball.rect.bottom >= self.surface.get_height()
