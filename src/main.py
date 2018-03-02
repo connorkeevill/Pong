@@ -8,7 +8,9 @@ from pages.GamePlay import GamePlay
 
 pygame.init()
 
-screen = pygame.display.set_mode((900, 600))
+screenWidth = 900
+screenHeight = 600
+screen = pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption("Pong")
 
 FPS = 60

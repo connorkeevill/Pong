@@ -31,4 +31,3 @@ def createText(text, size, colour):
 # |------------------------------------------
 def midpoint(lower, upper):
     return (lower + upper) // 2
-

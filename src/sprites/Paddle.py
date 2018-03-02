@@ -3,7 +3,11 @@
 import pygame
 pygame.init()
 
-
+# | Paddle()
+# |-------------------------------------------------
+# | Class for a paddle, which handles the paddle's
+# | location, movement and drawing of paddle
+# |------------------------------------
 class Paddle(pygame.sprite.Sprite):
     def __init__(self, xPos, yPos, colour=(255, 255, 255)):
         # | Call __init__() method of Sprite() to inherit

@@ -2,6 +2,10 @@
 
 import pygame
 
+# | Ball()
+# |------------------------------------------------------------
+# | Class for the ball which handles its drawing and movement
+# |------------------------------------------------------
 class Ball(pygame.sprite.Sprite):
     def __init__(self, xPos, yPos, colour=(255, 255, 255)):
         # | Call __init__() of the Sprite() class to inherit

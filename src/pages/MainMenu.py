@@ -11,47 +11,38 @@ from pages.Page import Page
 pygame.init()
 
 class MainMenu(Page):
-        def __init__(self, surface):
-            # | Call the superclass __init__() method
-            Page.__init__(self, surface)
+    def __init__(self, surface):
+        # | Call the superclass __init__() method
+        Page.__init__(self, surface)
 
-            # | btnPlay
-            # |--------------------------------
-            # | Starts the game when clicked
-            # |--------------------------
-            btnPlayDimensions = {"width":300, "height":100}
-            btnPlayXpos = 450
-            btnPlayYpos = 450
-            self.btnPlay = Button(btnPlayXpos, btnPlayYpos, btnPlayDimensions, colours.red, colours.blue, "Play")
+        # | btnPlay
+        # |----------
+        btnPlayDimensions = {"width":300, "height":100}
+        btnPlayXpos = 450
+        btnPlayYpos = 450
+        self.btnPlay = Button(btnPlayXpos, btnPlayYpos, btnPlayDimensions, colours.red, colours.blue, "Play")
 
-            # | ttlPong
-            # |-------------------------------------
-            # | The title to to introduce the game
-            # |-------------------------------
-            ttlPongXpos = 450
-            ttlPongYpos = 200
-            self.ttlPong = Title(ttlPongXpos, ttlPongYpos, "Pong", 121)
+        # | ttlPong
+        # |----------
+        ttlPongXpos = 450
+        ttlPongYpos = 200
+        self.ttlPong = Title(ttlPongXpos, ttlPongYpos, "Pong", 121)
 
-            self.addToObjects([self.btnPlay, self.ttlPong])
+        self.addToObjects([self.btnPlay, self.ttlPong])
 
-        # | handleEvent()
-        # |---------------------------------------------------------------------
-        # | Takes an event to determine what action can be taken to handle it
-        # |---------------------------------------------------------------
-        def handleEvent(self, event):
-            # | The action to tell the main.py file what to do (if required)
-            action = None
+    # | handleEvent()
+    # |---------------------------------------------------------------------
+    # | Takes an event to determine what action can be taken to handle it
+    # |---------------------------------------------------------------
+    def handleEvent(self, event):
+        action = None
 
-            # | Mouse motion events; allows for the hovering of buttons
-            if event.type == pygame.MOUSEMOTION:
-                xMouse, yMouse = pygame.mouse.get_pos()
-                self.btnPlay.hover(xMouse, yMouse)
+        if event.type == pygame.MOUSEMOTION:
+            xMouse, yMouse = pygame.mouse.get_pos()
+            self.btnPlay.hover(xMouse, yMouse)
 
-            # | Clicking events; for clicking on buttons
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.btnPlay.clicked():
-                    action = "GamePlay"
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if self.btnPlay.clicked():
+                action = "GamePlay"
 
-            # | Return the action
-            return action
-
+        return action

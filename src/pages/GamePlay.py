@@ -15,17 +15,51 @@ class GamePlay(Page):
         # | Call the superclass __init__() method
         Page.__init__(self, surface)
 
-        # | Create the ball and paddles
-        self.ball = Ball(450, 100, colours.white)
-        self.leftPaddle = Paddle(100, 100, colours.white)
-        self.rightPaddle = Paddle(800, 100, colours.white)
+        # | ball
+        # |-------
+        ballXpos = 450
+        ballYpos = 100
+        ballColour = colours.white
+        self.ball = Ball(ballXpos, ballYpos, ballColour)
 
-        # | Create the titles
-        self.leftTitle = Title(10, 10, "0", 32, colours.white)
-        self.rightTitle = Title(570, 10, "0", 32, colours.white)
+        # | leftPaddle
+        # |-------------
+        leftPaddleXpos = 100
+        leftPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
+        leftPaddleColour = colours.white
+        self.leftPaddle = Paddle(leftPaddleXpos, leftPaddleYpos, leftPaddleColour)
 
-        # | Create the players
+        # | rightPaddle
+        # |--------------
+        rightPaddleXpos = 800
+        rightPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
+        rightPaddleColour = colours.white
+        self.rightPaddle = Paddle(rightPaddleXpos, rightPaddleYpos, rightPaddleColour)
+
+        # | leftTitle
+        # |------------
+        leftTitleXpos = 10
+        leftTitleYpos = 20
+        leftTitleText = "0"
+        leftTitleSize = 45
+        leftTitleColour = colours.white
+        self.leftTitle = Title(leftTitleXpos, leftTitleYpos, leftTitleText, leftTitleSize, leftTitleColour)
+
+        # | rightTitle
+        # |-------------
+        rightTitleXpos = 840
+        rightTitleYpos = 20
+        rightTitleText = "0"
+        rightTitleSize = 45
+        rightTitleColour = colours.white
+        self.rightTitle = Title(rightTitleXpos, rightTitleYpos, rightTitleText, rightTitleSize, rightTitleColour)
+
+        # | leftPlayer
+        # |-------------
         self.leftPlayer = Player(self.leftPaddle, self.leftTitle)
+
+        # | rightPlayer
+        # |--------------
         self.rightPlayer = Player(self.rightPaddle, self.rightTitle)
 
         # | Integer to keep track of the number of keys that are being pressed, to indicate
@@ -118,6 +152,7 @@ class GamePlay(Page):
     # |---------------------------------------------------------------
     def handleEvent(self, event):
         action = None
+
         if event.type == pygame.KEYDOWN:
             self.keysPressed += 1
 

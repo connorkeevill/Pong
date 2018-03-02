@@ -2,6 +2,12 @@
 
 import Helpers
 
+# | Title()
+# |------------------------------------------------------------------
+# | Class for a title that can be displayed on a surface object. It
+# | builds upon the pygame text object by incorporating it's own
+# | methods for drawing, changing the text, and changing size
+# |-------------------------------------------------------
 class Title():
     def __init__(self, xPos, yPos, text, size, colour=(255, 255, 255)):
 
@@ -11,7 +17,7 @@ class Title():
         self.colour = colour
         self.text = Helpers.createText(text, size, colour)
 
-        # | Get the rect of the text and position
+        # | Get the rect of the text and position the title
         self.rect = self.text.get_rect()
         self.rect.centerx = xPos
         self.rect.centery = yPos
