@@ -6,12 +6,12 @@ class Player():
         self.paddle = paddle
         self.scoreTitle = scoreTitle
 
-    def score(self):
+    def increaseScore(self):
         self.score += 1
         self.updateScoreTitle()
 
     def updateScoreTitle(self):
-        self.scoreTitle.changeText(self.score)
+        self.scoreTitle.changeText(str(self.score))
 
     def movePaddleUp(self):
         self.paddle.moveUp()

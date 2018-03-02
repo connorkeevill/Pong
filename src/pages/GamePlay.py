@@ -8,6 +8,7 @@ from resources import colours
 from pages.Page import Page
 from objects.Title import Title
 from objects.Player import Player
+from random import uniform
 
 class GamePlay(Page):
     def __init__(self, surface):
@@ -43,8 +44,7 @@ class GamePlay(Page):
     def update(self):
         self.manageBounces()
 
-        if self.ballPastEdges():
-            self.ball.rect.centerx = Helpers.midpoint(0, self.surface.get_width())
+        self.checkBallIsWithinScreen()
 
         # | If any keys are pressed, check if the paddles need to move
         if not self.keysPressed == 0:
@@ -153,8 +153,17 @@ class GamePlay(Page):
         # | Sets the angle that the ball leaves the paddle with
         self.ball.setYVelocity(gradient)
 
+    # | setbBallDirection()
+    # |---------------------------------------------------------------------
+    # | Called after a ball has hit a paddle, this method will determine
+    # | which paddle the ball has hit, and use this information to
+    # | determine the direction that the ball needs to move in
+    # | to allow it to bounce off of the paddle, preventing
+    # | the ball from getting "stuck" within the paddle
+    # |---------------------------------------------
     def setBallDirection(self):
-        # | Because this method will only be called when a collision has occured with a paddle, we can just check one side
+        # | Because this method will only be called when a collision
+        # | has occured with a paddle, we can just check one side
         ballCollidedWithLeftPaddle = self.ball.rect.centerx < Helpers.midpoint(0, self.surface.get_width())
 
         # | If the ball hit the left paddle, bounce right
@@ -179,6 +188,44 @@ class GamePlay(Page):
             self.ball.setVerticalDirectionDown()
         elif ballHasCollidedWithBottom:
             self.ball.setVerticalDirectionUp()
+
+    # | checkBallIsWithinScreen()
+    # |-------------------------------------------------
+    # | Checks if the ball has gone off the edges of
+    # | the screen, giving the player the point,
+    # | and recentring the ball if it has
+    # |-----------------------------
+    def checkBallIsWithinScreen(self):
+        if self.ballPastEdges():
+            self.allocatePointToPlayer()
+            self.recentreBall()
+
+    # | allocatePointToPlayer()
+    # |----------------------------------------------------
+    # | Determines which side of the screen the ball has
+    # | gone off, and allocates a point to the player
+    # | that's on the opposite side of the screen
+    # |----------------------------------------
+    def allocatePointToPlayer(self):
+        ballHasGoneOffLeftEdge = self.ball.rect.centerx < 0
+        ballHasGoneOffRightEdge = self.ball.rect.centerx > self.surface.get_width()
+
+        if ballHasGoneOffLeftEdge:
+            self.rightPlayer.increaseScore()
+        elif ballHasGoneOffRightEdge:
+            self.leftPlayer.increaseScore()
+
+    # | recentreBall()
+    # |----------------------------------------------------------
+    # | Puts the ball back into the centre of the screen (after
+    # | a player has scored) and gives it a random direction
+    # |--------------------------------------------------
+    def recentreBall(self):
+        self.ball.rect.centerx = Helpers.midpoint(0, self.surface.get_width())
+        self.ball.rect.centery = Helpers.midpoint(0, self.surface.get_height())
+
+        newBallGradient = uniform(-1, 1) # | uniform() generates a random real number within the range [a, b)
+        self.ball.setYVelocity(newBallGradient)
 
     # | ballPastEdges()
     # |------------------------------------------------------------------
