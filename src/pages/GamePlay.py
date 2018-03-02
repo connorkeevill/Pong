@@ -73,16 +73,33 @@ class GamePlay(Page):
     def movePaddles(self):
         keys = pygame.key.get_pressed()
 
-        # | Movement for the right paddle
-        if keys[pygame.K_k]:
-            self.rightPlayer.movePaddleUp()
-        if keys[pygame.K_m]:
-            self.rightPlayer.movePaddleDown()
-        # | Movement for the left paddle
-        if keys[pygame.K_a]:
+        # | Movement for the left player
+        if keys[pygame.K_a] and not self.paddleHasHitTop(self.leftPlayer.paddle):
             self.leftPlayer.movePaddleUp()
-        if keys[pygame.K_z]:
+        if keys[pygame.K_z] and not self.paddleHasHitBottom(self.leftPlayer.paddle):
             self.leftPlayer.movePaddleDown()
+
+        # | Movement for the right player
+        if keys[pygame.K_k] and not self.paddleHasHitTop(self.rightPlayer.paddle):
+            self.rightPlayer.movePaddleUp()
+        if keys[pygame.K_m] and not self.paddleHasHitBottom(self.rightPlayer.paddle):
+            self.rightPlayer.movePaddleDown()
+
+    # | paddleHasHitBottom()
+    # |---------------------------------------------
+    # | Returns true if the passed paddle has made
+    # | contact with the bottom of the window
+    # |----------------------------------
+    def paddleHasHitBottom(self, paddle):
+        return paddle.rect.bottom >= self.surface.get_height()
+
+    # | paddleHasHitTop()
+    # |----------------------------------------------
+    # | Returns true if the passed paddle has made
+    # | contact with the top of the window
+    # |------------------------------
+    def paddleHasHitTop(self, paddle):
+        return paddle.rect.top <= 0
 
     # | handleEvent()
     # |---------------------------------------------------------------------
