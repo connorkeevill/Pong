@@ -7,7 +7,7 @@ from pages.MainMenu import MainMenu
 from pages.GamePlay import GamePlay
 import os
 
-os.environ['SDL_VIDEO_CENTERED'] = '1'
+os.environ['SDL_VIDEO_CENTERED'] = '1' # | This centers the window
 pygame.init()
 
 screenWidth = 900

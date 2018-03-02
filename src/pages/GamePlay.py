@@ -24,21 +24,21 @@ class GamePlay(Page):
 
         # | leftPaddle
         # |-------------
-        leftPaddleXpos = 100
+        leftPaddleXpos = 50
         leftPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
         leftPaddleColour = colours.white
         self.leftPaddle = Paddle(leftPaddleXpos, leftPaddleYpos, leftPaddleColour)
 
         # | rightPaddle
         # |--------------
-        rightPaddleXpos = 800
+        rightPaddleXpos = self.surface.get_width() - 50
         rightPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
         rightPaddleColour = colours.white
         self.rightPaddle = Paddle(rightPaddleXpos, rightPaddleYpos, rightPaddleColour)
 
         # | leftTitle
         # |------------
-        leftTitleXpos = 10
+        leftTitleXpos = 20
         leftTitleYpos = 20
         leftTitleText = "0"
         leftTitleSize = 45
@@ -47,7 +47,7 @@ class GamePlay(Page):
 
         # | rightTitle
         # |-------------
-        rightTitleXpos = 840
+        rightTitleXpos = self.surface.get_width() - 20
         rightTitleYpos = 20
         rightTitleText = "0"
         rightTitleSize = 45
