@@ -4,10 +4,10 @@ import pygame
 import Helpers
 from sprites.Paddle import Paddle
 from sprites.Ball import Ball
-from resources import colours
-from pages.Page import Page
 from objects.Title import Title
 from objects.Player import Player
+from pages.Page import Page
+from resources import colours
 from random import uniform
 
 class GamePlay(Page):
