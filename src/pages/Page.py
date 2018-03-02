@@ -45,8 +45,8 @@ class Page():
     # | Adds items to the page's objects list
     # |----------------------------------
     def addToObjects(self, objects):
-        if objects is list:
-            self.objects.append(objects)
+        if type(objects) != list:
+           self.objects.append(objects)
         else:
             for object in objects:
                 self.objects.append(object)

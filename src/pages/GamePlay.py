@@ -16,6 +16,9 @@ class GamePlay(Page):
         # | Call the superclass __init__() method
         Page.__init__(self, surface)
 
+        # | The title to be shown when a someone wins
+        self.congratulationsTitle = None
+
         # | ball
         # |-------
         ballXpos = 450
@@ -258,6 +261,7 @@ class GamePlay(Page):
         if self.ballPastEdges():
             self.allocatePointToPlayer()
             self.recentreBall()
+            self.checkForPlayerWin()
 
     # | allocatePointToPlayer()
     # |----------------------------------------------------
@@ -305,3 +309,26 @@ class GamePlay(Page):
     # |------------------------------------------------------------
     def ballHasBouncedOnBoarders(self):
         return self.ball.rect.top <= 0 or self.ball.rect.bottom >= self.surface.get_height()
+
+    def checkForPlayerWin(self):
+        if self.leftPlayer.score == 10: self.showWinMessage(self.leftPlayer)
+        elif self.rightPlayer.score == 10: self.showWinMessage(self.rightPlayer)
+
+
+    def showWinMessage(self, player):
+        self.ball.xVelocity = 0
+        self.ball.yVelocity = 0
+
+        # | congratulationsTitle
+        # |-----------------------
+        congratulationsTitleXpos = 0
+        if player == self.leftPlayer: congratulationsTitleXpos = 450   # | Eventually will be able to differentiate between
+        elif player == self.rightPlayer: congratulationsTitleXpos = 450# | sides, and move the message to a differnt side
+        congratulationsTitleYpos = Helpers.midpoint(0, self.surface.get_height()) - 70
+        congratulationsTitleText = "Conrgatulations! You won!"
+        congratulationsTitleSize = 55
+        congratulationsTitleColour = colours.red
+        self.congratulationsTitle = Title(congratulationsTitleXpos, congratulationsTitleYpos, congratulationsTitleText,
+                                          congratulationsTitleSize, congratulationsTitleColour)
+
+        self.addToObjects(self.congratulationsTitle)
