@@ -5,7 +5,9 @@ import Helpers
 from resources import colours
 from pages.MainMenu import MainMenu
 from pages.GamePlay import GamePlay
+import os
 
+os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 
 screenWidth = 900

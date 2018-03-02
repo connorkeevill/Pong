@@ -18,7 +18,7 @@ class GamePlay(Page):
         # | ball
         # |-------
         ballXpos = 450
-        ballYpos = 100
+        ballYpos = Helpers.midpoint(0, self.surface.get_height())
         ballColour = colours.white
         self.ball = Ball(ballXpos, ballYpos, ballColour)
 
