@@ -42,13 +42,14 @@ class GamePlay(Page):
     # | be ran each loop of the game
     # |------------------------
     def update(self):
+        # | Bounce the ball if necessary
         self.checkForCollisions()
 
+        # | If the ball has moved off the (sides of the) screen, score a player, and put the ball back in the middle
         self.checkBallIsWithinScreen()
 
-        # | If any keys are pressed, check if the paddles need to move
-        if not self.keysPressed == 0:
-            self.movePaddles()
+        # | If any keys are being pressed check if the paddles need to move
+        self.checkPlayerMovement()
 
         self.ball.move()
 
@@ -64,13 +65,23 @@ class GamePlay(Page):
         # | Boundary bounces
         self.bounceBallOffBoarder()
 
-    # | movePaddles()
+    # | checkPlayerMovement()
+    # |----------------------------------------------
+    # | Checks for any pressed keys, and moves the
+    # | relevant paddles and have been pressed
+    # |------------------------------------
+    def checkPlayerMovement(self):
+        # | If any keys are pressed, check if the paddles need to move
+        if not self.keysPressed == 0:
+            self.movePlayerPaddles()
+
+    # | movePlayerPaddles()
     # |-----------------------------------------------------
     # | Gets the keys that are currently being pressed by
     # | the user(s) and uses them to determine whether
-    # | either of the paddles need to move or not
+    # | or not either of the paddles need to move
     # |-------------------------------------
-    def movePaddles(self):
+    def movePlayerPaddles(self):
         keys = pygame.key.get_pressed()
 
         # | Movement for the left player
@@ -226,6 +237,9 @@ class GamePlay(Page):
 
         newBallGradient = uniform(-1, 1) # | uniform() generates a random real number within the range [a, b)
         self.ball.setYVelocity(newBallGradient)
+
+        # | Flip the direction of the ball so that it's heading towards the player that just scored
+        self.ball.changeDirectionX()
 
     # | ballPastEdges()
     # |------------------------------------------------------------------

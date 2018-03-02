@@ -34,6 +34,16 @@ class Ball(pygame.sprite.Sprite):
         self.rect.centerx += self.xVelocity
         self.rect.centery += self.yVelocity
 
+    # | changeDirectionX()
+    # |---------------------------------------------
+    # | Changes the direction of the ball in the
+    # | x-axis by changing the sign of the
+    # | velocity. Allows the ball to
+    # | 'bounce' off collisions
+    # |-------------------
+    def changeDirectionX(self):
+        self.xVelocity *= -1
+
     # | setHorizontalDirectionLeft()
     # |----------------------------------------------------
     # | Changes the ball's x velocity so that it's moving
@@ -41,7 +51,7 @@ class Ball(pygame.sprite.Sprite):
     # |---------------------------------------------
     def setHorizontalDirectionLeft(self):
         if self.xVelocity > 0:
-            self.xVelocity *= -1
+            self.changeDirectionX()
 
     # | setHorizontalDirectionLeftRight()
     # |----------------------------------------------------
@@ -50,7 +60,17 @@ class Ball(pygame.sprite.Sprite):
     # |---------------------------------------------
     def setHorizontalDirectionRight(self):
         if self.xVelocity < 0:
-            self.xVelocity *= -1
+            self.changeDirectionX()
+
+    # | changeDirectionY()
+    # |---------------------------------------------
+    # | Changes the direction of the ball in the
+    # | y-axis by changing the sign off the
+    # | velocity. Allows the ball to
+    # | 'bounce' off collisions
+    # |---------------------
+    def changeDirectionY(self):
+        self.yVelocity *= -1
 
     # | setVerticalDirectionUp()
     # |----------------------------------------------
@@ -59,7 +79,7 @@ class Ball(pygame.sprite.Sprite):
     # |------------------------------------
     def setVerticalDirectionUp(self):
         if self.yVelocity > 0:
-            self.yVelocity *= -1
+            self.changeDirectionY()
 
     # | setVerticalDirectionDown()
     # |---------------------------------------------
@@ -68,7 +88,7 @@ class Ball(pygame.sprite.Sprite):
     # |--------------------------------------
     def setVerticalDirectionDown(self):
         if self.yVelocity < 0:
-            self.yVelocity *= -1
+            self.changeDirectionY()
 
     # | setYVelocity()
     # |--------------------------------------------------------------
