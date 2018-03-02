@@ -6,6 +6,7 @@ from sprites.Paddle import Paddle
 from sprites.Ball import Ball
 from objects.Title import Title
 from objects.Player import Player
+from objects.VerticalLine import VerticalLine
 from pages.Page import Page
 from resources import colours
 from random import uniform
@@ -62,11 +63,23 @@ class GamePlay(Page):
         # |--------------
         self.rightPlayer = Player(self.rightPaddle, self.rightTitle)
 
+        # | verticalLine
+        # |---------------
+        verticalLineXpos = Helpers.midpoint(0, self.surface.get_width())
+        verticalLineStartPoint = 0
+        verticalLineEndPoint = self.surface.get_height()
+        verticalLineSegmentLength = 20
+        verticalLineInterval = 15
+        verticalLineColour = colours.white
+        self.verticalLine = VerticalLine(verticalLineXpos, verticalLineStartPoint, verticalLineEndPoint,
+                                         verticalLineSegmentLength, verticalLineInterval, verticalLineColour)
+
         # | Integer to keep track of the number of keys that are being pressed, to indicate
         # | whether or not the paddles need to be moves - helps to improve performance.
         self.keysPressed = 0
 
-        self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle, self.leftTitle, self.rightTitle])
+        self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle,
+                           self.leftTitle, self.rightTitle, self.verticalLine])
 
     # | update()
     # |--------------------------------------------------
