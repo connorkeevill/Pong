@@ -6,6 +6,8 @@ from sprites.Paddle import Paddle
 from sprites.Ball import Ball
 from resources import colours
 from pages.Page import Page
+from objects.Title import Title
+from objects.Player import Player
 
 class GamePlay(Page):
     def __init__(self, surface):
@@ -17,11 +19,19 @@ class GamePlay(Page):
         self.leftPaddle = Paddle(100, 100, colours.white)
         self.rightPaddle = Paddle(800, 100, colours.white)
 
+        # | Create the titles
+        self.leftTitle = Title(10, 10, "0", 32, colours.white)
+        self.rightTitle = Title(570, 10, "0", 32, colours.white)
+
+        # | Create the players
+        self.leftPlayer = Player(self.leftPaddle, self.leftTitle)
+        self.rightPlayer = Player(self.rightPaddle, self.rightTitle)
+
         # | Integer to keep track of the number of keys that are being pressed, to indicate
         # | whether or not the paddles need to be moves - helps to improve performance.
         self.keysPressed = 0
 
-        self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle])
+        self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle, self.leftTitle, self.rightTitle])
 
     # | update()
     # |--------------------------------------------------
@@ -65,14 +75,14 @@ class GamePlay(Page):
 
         # | Movement for the right paddle
         if keys[pygame.K_k]:
-            self.rightPaddle.moveUp()
+            self.rightPlayer.movePaddleUp()
         if keys[pygame.K_m]:
-            self.rightPaddle.moveDown()
+            self.rightPlayer.movePaddleDown()
         # | Movement for the left paddle
         if keys[pygame.K_a]:
-            self.leftPaddle.moveUp()
+            self.leftPlayer.movePaddleUp()
         if keys[pygame.K_z]:
-            self.leftPaddle.moveDown()
+            self.leftPlayer.movePaddleDown()
 
     # | handleEvent()
     # |---------------------------------------------------------------------
