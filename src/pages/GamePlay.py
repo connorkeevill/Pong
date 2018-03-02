@@ -42,7 +42,7 @@ class GamePlay(Page):
     # | be ran each loop of the game
     # |------------------------
     def update(self):
-        self.manageBounces()
+        self.checkForCollisions()
 
         self.checkBallIsWithinScreen()
 
@@ -52,11 +52,11 @@ class GamePlay(Page):
 
         self.ball.move()
 
-    # | manageBounces()
-    # |-----------------------------------------------------
-    # | Manages collisions for the ball to allow "bounces"
-    # |------------------------------------------------
-    def manageBounces(self):
+    # | checkForCollisions()
+    # |--------------------------------------------------------
+    # | Checks for collisions for the ball to allow "bounces"
+    # |--------------------------------------------------
+    def checkForCollisions(self):
         # | Paddle bounces
         if self.ballHasBouncedOnPaddle():
             self.bounceBallOffPaddle()
