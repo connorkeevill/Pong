@@ -28,7 +28,7 @@ class Ball(pygame.sprite.Sprite):
     # | Draws the ball
     # |-----------
     def draw(self, surface):
-        pygame.draw.rect(surface, self.colour, self.rect)
+        pygame.draw.circle(surface, self.colour, (self.rect.centerx, self.rect.centery), self.rect.width // 2)
 
     # | move()
     # |--------------------------------------------------
