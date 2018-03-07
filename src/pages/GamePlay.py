@@ -19,6 +19,9 @@ class GamePlay(Page):
         # | The title to be shown when a someone wins
         self.congratulationsTitle = None
 
+        # | The score needed to win
+        self.winScore = 10
+
         # | ball
         # |-------
         ballXpos = 450
@@ -310,11 +313,23 @@ class GamePlay(Page):
     def ballHasBouncedOnBoarders(self):
         return self.ball.rect.top <= 0 or self.ball.rect.bottom >= self.surface.get_height()
 
+    # | checkForPlayerWin()
+    # |----------------------------------------
+    # | Checks if either player has won, and
+    # | shows a message indicating that
+    # | the player is the winner
+    # |--------------------
     def checkForPlayerWin(self):
-        if self.leftPlayer.score == 10: self.showWinMessage(self.leftPlayer)
-        elif self.rightPlayer.score == 10: self.showWinMessage(self.rightPlayer)
+        if self.leftPlayer.score == self.winScore: self.showWinMessage(self.leftPlayer)
+        elif self.rightPlayer.score == self.winScore: self.showWinMessage(self.rightPlayer)
 
-
+    # | showWinMessage()
+    # |---------------------------------------------------
+    # | Immobilises the ball, and creates a title object
+    # | (and adds it to the objects list to allow
+    # | it to be drawn), essentially bringing
+    # | the game to a closing screen.
+    # |--------------------------
     def showWinMessage(self, player):
         self.ball.xVelocity = 0
         self.ball.yVelocity = 0
