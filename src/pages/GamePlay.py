@@ -185,7 +185,13 @@ class GamePlay(Page):
     # | Determines whether the ball has collided (hence bounce) with a paddle
     # |-------------------------------------------------------------------
     def ballHasBouncedOnPaddle(self):
-        return self.ball.rect.colliderect(self.rightPaddle.rect) or self.ball.rect.colliderect(self.leftPaddle.rect)
+        # | The 'and' part of both these boolean statements prevents the ball from
+        # | bouncing when it hits either the top or the bottom of the paddles
+        ballHasBouncedOnLeftPaddle = (self.ball.rect.colliderect(self.leftPaddle.rect)
+                                       and self.ball.rect.left > self.leftPaddle.rect.centerx)
+        ballHasBouncedOnRightPaddle = (self.ball.rect.colliderect(self.rightPaddle.rect)
+                                       and self.ball.rect.right < self.rightPaddle.rect.centerx)
+        return ballHasBouncedOnLeftPaddle or ballHasBouncedOnRightPaddle
 
     # | bounceBallOffPaddle()
     # |-----------------------------------------------------------------
