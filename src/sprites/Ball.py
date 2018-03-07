@@ -12,7 +12,7 @@ class Ball(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         # | Create the rect for the ball
-        self.rect = pygame.Rect(xPos, yPos, 40, 40)
+        self.rect = pygame.Rect(xPos, yPos, 20, 20)
 
         self.colour = colour
 
@@ -20,7 +20,7 @@ class Ball(pygame.sprite.Sprite):
         self.rect.centerx = xPos
         self.rect.centery = yPos
 
-        self.xVelocity = 8
+        self.xVelocity = 11
         self.yVelocity = 0
 
     # | draw()

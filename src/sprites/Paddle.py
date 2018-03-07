@@ -14,11 +14,14 @@ class Paddle(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         # | Create the paddle's rect and position it
-        self.rect = pygame.Rect(xPos, yPos, 30, 140)
+        self.rect = pygame.Rect(xPos, yPos, 15, 90)
         self.rect.centerx = xPos
         self.rect.centery = yPos
 
         self.colour = colour
+
+        # | The paddle's speed
+        self.yVelocity = 10
 
     # | draw()
     # |-------------------
@@ -32,11 +35,11 @@ class Paddle(pygame.sprite.Sprite):
     # | Moves the paddle up
     # |------------------
     def moveUp(self):
-        self.rect.y -= 5
+        self.rect.y -= self.yVelocity
 
     # | moveDown()
     # |------------------------
     # | Moves the paddle down
     # |--------------------
     def moveDown(self):
-        self.rect.y += 5
+        self.rect.y += self.yVelocity

@@ -185,12 +185,8 @@ class GamePlay(Page):
     # | Determines whether the ball has collided (hence bounce) with a paddle
     # |-------------------------------------------------------------------
     def ballHasBouncedOnPaddle(self):
-        # | The 'and' part of both these boolean statements prevents the ball from
-        # | bouncing when it hits either the top or the bottom of the paddles
-        ballHasBouncedOnLeftPaddle = (self.ball.rect.colliderect(self.leftPaddle.rect)
-                                       and self.ball.rect.left > self.leftPaddle.rect.centerx)
-        ballHasBouncedOnRightPaddle = (self.ball.rect.colliderect(self.rightPaddle.rect)
-                                       and self.ball.rect.right < self.rightPaddle.rect.centerx)
+        ballHasBouncedOnLeftPaddle = (self.ball.rect.colliderect(self.leftPaddle.rect))
+        ballHasBouncedOnRightPaddle = (self.ball.rect.colliderect(self.rightPaddle.rect))
         return ballHasBouncedOnLeftPaddle or ballHasBouncedOnRightPaddle
 
     # | bounceBallOffPaddle()
@@ -296,7 +292,7 @@ class GamePlay(Page):
         self.ball.rect.centerx = Helpers.midpoint(0, self.surface.get_width())
         self.ball.rect.centery = Helpers.midpoint(0, self.surface.get_height())
 
-        newBallGradient = uniform(-1, 1) # | uniform() generates a random real number within the range [a, b)
+        newBallGradient = uniform(-0.6, 0.6) # | uniform() generates a random real number within the range [a, b)
         self.ball.setYVelocity(newBallGradient)
 
         # | Flip the direction of the ball so that it's heading towards the player that just scored
