@@ -2,6 +2,7 @@
 
 import pygame
 import Helpers
+import threading
 from sprites.Paddle import Paddle
 from sprites.Ball import Ball
 from objects.Title import Title
@@ -15,12 +16,6 @@ class GamePlay(Page):
     def __init__(self, surface):
         # | Call the superclass __init__() method
         Page.__init__(self, surface)
-
-        # | The title to be shown when a someone wins
-        self.congratulationsTitle = None
-
-        # | The score needed to win
-        self.winScore = 10
 
         # | ball
         # |-------
@@ -40,7 +35,7 @@ class GamePlay(Page):
         # |--------------
         rightPaddleXpos = self.surface.get_width() - 50
         rightPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
-        rightPaddleColour = colours.white
+        rightPaddleColour = colours.green
         self.rightPaddle = Paddle(rightPaddleXpos, rightPaddleYpos, rightPaddleColour)
 
         # | leftTitle
@@ -83,6 +78,18 @@ class GamePlay(Page):
         # | Integer to keep track of the number of keys that are being pressed, to indicate
         # | whether or not the paddles need to be moves - helps to improve performance.
         self.keysPressed = 0
+
+        # | The title to be shown when a someone wins
+        self.congratulationsTitle = None
+
+        # | The score needed to win
+        self.winScore = 10
+
+        # | Flag to indicate if the code needs to check if the ball is on the screen
+        self.ballOnScreenNeedsToBeChecked = True
+
+        # | The delay for the ball to be recentred in the screen after leaving (in seconds)
+        self.ballCentreTimer = 0.3
 
         self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle,
                            self.leftTitle, self.rightTitle, self.verticalLine])
@@ -263,10 +270,16 @@ class GamePlay(Page):
     # | and recentring the ball if it has
     # |-----------------------------
     def checkBallIsWithinScreen(self):
-        if self.ballPastEdges():
+        # | Order of boolean statements is important here for efficiency; having the boolean before the
+        # | method can save processing by taking advantage of the "and"'s short circuiting nature
+        if self.ballOnScreenNeedsToBeChecked and self.ballPastEdges():
             self.allocatePointToPlayer()
-            self.recentreBall()
             self.checkForPlayerWin()
+
+            # | Tell the code that it doesn't need to check the ball off the screen
+            self.ballOnScreenNeedsToBeChecked = False
+            centreBallThread = threading.Timer(self.ballCentreTimer, self.recentreBall)
+            centreBallThread.start()
 
     # | allocatePointToPlayer()
     # |----------------------------------------------------
@@ -297,6 +310,9 @@ class GamePlay(Page):
 
         # | Flip the direction of the ball so that it's heading towards the player that just scored
         self.ball.changeDirectionX()
+
+        # | Tell the code that it needs to check the ball's location now that it's on the screen
+        self.ballOnScreenNeedsToBeChecked = True
 
     # | ballPastEdges()
     # |------------------------------------------------------------------
