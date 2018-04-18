@@ -1,5 +1,6 @@
 #CK
 
+import os
 import pygame
 import Helpers
 import threading
@@ -12,10 +13,16 @@ from pages.Page import Page
 from resources import colours
 from random import uniform
 
+pygame.mixer.init()
+
+currentPath = os.path.dirname(os.path.realpath(__file__))
+
 class GamePlay(Page):
     def __init__(self, surface):
         # | Call the superclass __init__() method
         Page.__init__(self, surface)
+
+        self.bounceSound = pygame.mixer.Sound(os.path.join(currentPath, r"..\resources\ball hit paddle.wav"))
 
         # | ball
         # |-------
@@ -35,7 +42,7 @@ class GamePlay(Page):
         # |--------------
         rightPaddleXpos = self.surface.get_width() - 50
         rightPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
-        rightPaddleColour = colours.green
+        rightPaddleColour = colours.white
         self.rightPaddle = Paddle(rightPaddleXpos, rightPaddleYpos, rightPaddleColour)
 
         # | leftTitle
@@ -121,6 +128,9 @@ class GamePlay(Page):
         # | Paddle bounces
         if self.ballHasBouncedOnPaddle():
             self.bounceBallOffPaddle()
+
+            # | Play the bounce noise
+            self.bounceSound.play()
 
         # | Boundary bounces
         self.bounceBallOffBoarder()
@@ -227,7 +237,7 @@ class GamePlay(Page):
         # | Sets the angle that the ball leaves the paddle with
         self.ball.setYVelocity(gradient)
 
-    # | setbBallDirection()
+    # | setBallDirection()
     # |---------------------------------------------------------------------
     # | Called after a ball has hit a paddle, this method will determine
     # | which paddle the ball has hit, and use this information to
