@@ -25,8 +25,6 @@ class GamePlay(Page):
 
         self.bounceSound = pygame.mixer.Sound(os.path.join(currentPath, r"..\resources\ball hit paddle.wav"))
 
-        self.playerAmount = playerAmount
-
         # | ball
         # |-------
         ballXpos = 450
@@ -70,9 +68,9 @@ class GamePlay(Page):
 
         # | leftPlayer
         # |-------------
-        if self.playerAmount == 1:
+        if playerAmount == 1:
             self.leftPlayer = ComputerPlayer(self.leftPaddle, self.leftTitle, self.ball)
-        elif self.playerAmount == 2:
+        elif playerAmount == 2:
             leftPlayerUpKey = pygame.K_a
             leftPlayerDownKey = pygame.K_z
             self.leftPlayer = HumanPlayer(self.leftPaddle, self.leftTitle, leftPlayerUpKey, leftPlayerDownKey)
@@ -163,8 +161,6 @@ class GamePlay(Page):
     # | or not either of the paddles need to move
     # |--------------------------------------
     def movePlayerPaddles(self):
-        self.playerKeysArray = pygame.key.get_pressed()
-
         self.rightPlayer.movePaddle()
         self.leftPlayer.movePaddle()
 

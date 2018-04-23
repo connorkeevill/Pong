@@ -4,7 +4,7 @@ from objects.Player import Player
 
 
 class ComputerPlayer(Player):
-
+    # | Call the superclass __init__() method
     def __init__(self, paddle, scoreTitle, ball):
         Player.__init__(self, paddle, scoreTitle)
         self.ball = ball
@@ -16,8 +16,8 @@ class ComputerPlayer(Player):
     # |----------------------------------
     def movePaddle(self):
         # | If paddle is above the ball
-        if self.paddle.rect.centery < self.ball.rect.centery:
+        if self.paddle.rect.bottom < self.ball.rect.centery:
             self.movePaddleDown()
         # | If paddle is below the ball
-        elif self.paddle.rect.centery > self.ball.rect.centery:
+        elif self.paddle.rect.top > self.ball.rect.centery:
             self.movePaddleUp()
