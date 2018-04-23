@@ -7,7 +7,8 @@ import threading
 from sprites.Paddle import Paddle
 from sprites.Ball import Ball
 from objects.Title import Title
-from objects.Player import Player
+from objects.HumanPlayer import HumanPlayer
+from objects.ComputerPlayer import ComputerPlayer
 from objects.VerticalLine import VerticalLine
 from pages.Page import Page
 from resources import colours
@@ -18,11 +19,13 @@ pygame.mixer.init()
 currentPath = os.path.dirname(os.path.realpath(__file__))
 
 class GamePlay(Page):
-    def __init__(self, surface):
+    def __init__(self, surface, playerAmount):
         # | Call the superclass __init__() method
         Page.__init__(self, surface)
 
         self.bounceSound = pygame.mixer.Sound(os.path.join(currentPath, r"..\resources\ball hit paddle.wav"))
+
+        self.playerAmount = playerAmount
 
         # | ball
         # |-------
@@ -36,14 +39,16 @@ class GamePlay(Page):
         leftPaddleXpos = 50
         leftPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
         leftPaddleColour = colours.white
-        self.leftPaddle = Paddle(leftPaddleXpos, leftPaddleYpos, leftPaddleColour)
+        leftPaddleWindowHeight = self.surface.get_height()
+        self.leftPaddle = Paddle(leftPaddleXpos, leftPaddleYpos, leftPaddleWindowHeight, leftPaddleColour)
 
         # | rightPaddle
         # |--------------
         rightPaddleXpos = self.surface.get_width() - 50
         rightPaddleYpos = Helpers.midpoint(0, self.surface.get_height())
         rightPaddleColour = colours.white
-        self.rightPaddle = Paddle(rightPaddleXpos, rightPaddleYpos, rightPaddleColour)
+        rightPaddleWindowHeight = self.surface.get_height()
+        self.rightPaddle = Paddle(rightPaddleXpos, rightPaddleYpos, rightPaddleWindowHeight, rightPaddleColour)
 
         # | leftTitle
         # |------------
@@ -65,11 +70,18 @@ class GamePlay(Page):
 
         # | leftPlayer
         # |-------------
-        self.leftPlayer = Player(self.leftPaddle, self.leftTitle)
+        if self.playerAmount == 1:
+            self.leftPlayer = ComputerPlayer(self.leftPaddle, self.leftTitle, self.ball)
+        elif self.playerAmount == 2:
+            leftPlayerUpKey = pygame.K_a
+            leftPlayerDownKey = pygame.K_z
+            self.leftPlayer = HumanPlayer(self.leftPaddle, self.leftTitle, leftPlayerUpKey, leftPlayerDownKey)
 
         # | rightPlayer
         # |--------------
-        self.rightPlayer = Player(self.rightPaddle, self.rightTitle)
+        rightPlayerUpKey = pygame.K_k
+        rightPlayerDownKey = pygame.K_m
+        self.rightPlayer = HumanPlayer(self.rightPaddle, self.rightTitle, rightPlayerUpKey, rightPlayerDownKey)
 
         # | verticalLine
         # |---------------
@@ -116,9 +128,18 @@ class GamePlay(Page):
         self.checkBallIsWithinScreen()
 
         # | If any keys are being pressed check if the paddles need to move
-        self.checkPlayerMovement()
+        self.movePlayerPaddles()
 
         self.ball.move()
+
+    # | handleEvent()
+    # |---------------------------------------------------------------------
+    # | Takes an event to determine what action can be taken to handle it
+    # |---------------------------------------------------------------
+    def handleEvent(self, event):
+        action = None
+
+        return action
 
     # | checkForCollisions()
     # |--------------------------------------------------------
@@ -135,67 +156,17 @@ class GamePlay(Page):
         # | Boundary bounces
         self.bounceBallOffBoarder()
 
-    # | checkPlayerMovement()
-    # |----------------------------------------------
-    # | Checks for any pressed keys, and moves the
-    # | relevant paddles and have been pressed
-    # |------------------------------------
-    def checkPlayerMovement(self):
-        # | If any keys are pressed, check if the paddles need to move
-        if not self.keysPressed == 0:
-            self.movePlayerPaddles()
-
     # | movePlayerPaddles()
     # |-----------------------------------------------------
     # | Gets the keys that are currently being pressed by
     # | the user(s) and uses them to determine whether
     # | or not either of the paddles need to move
-    # |-------------------------------------
+    # |--------------------------------------
     def movePlayerPaddles(self):
-        keys = pygame.key.get_pressed()
+        self.playerKeysArray = pygame.key.get_pressed()
 
-        # | Movement for the left player
-        if keys[pygame.K_a] and not self.paddleHasHitTop(self.leftPlayer.paddle):
-            self.leftPlayer.movePaddleUp()
-        if keys[pygame.K_z] and not self.paddleHasHitBottom(self.leftPlayer.paddle):
-            self.leftPlayer.movePaddleDown()
-
-        # | Movement for the right player
-        if keys[pygame.K_k] and not self.paddleHasHitTop(self.rightPlayer.paddle):
-            self.rightPlayer.movePaddleUp()
-        if keys[pygame.K_m] and not self.paddleHasHitBottom(self.rightPlayer.paddle):
-            self.rightPlayer.movePaddleDown()
-
-    # | paddleHasHitBottom()
-    # |---------------------------------------------
-    # | Returns true if the passed paddle has made
-    # | contact with the bottom of the window
-    # |----------------------------------
-    def paddleHasHitBottom(self, paddle):
-        return paddle.rect.bottom >= self.surface.get_height()
-
-    # | paddleHasHitTop()
-    # |----------------------------------------------
-    # | Returns true if the passed paddle has made
-    # | contact with the top of the window
-    # |------------------------------
-    def paddleHasHitTop(self, paddle):
-        return paddle.rect.top <= 0
-
-    # | handleEvent()
-    # |---------------------------------------------------------------------
-    # | Takes an event to determine what action can be taken to handle it
-    # |---------------------------------------------------------------
-    def handleEvent(self, event):
-        action = None
-
-        if event.type == pygame.KEYDOWN:
-            self.keysPressed += 1
-
-        if event.type == pygame.KEYUP:
-            self.keysPressed -= 1
-
-        return action
+        self.rightPlayer.movePaddle()
+        self.leftPlayer.movePaddle()
 
     # | ballBounceOnPaddle()
     # |------------------------------------------------------------------------

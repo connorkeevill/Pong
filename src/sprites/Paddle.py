@@ -9,7 +9,7 @@ pygame.init()
 # | location, movement and drawing of paddle
 # |------------------------------------
 class Paddle(pygame.sprite.Sprite):
-    def __init__(self, xPos, yPos, colour=(255, 255, 255)):
+    def __init__(self, xPos, yPos, windowHeight, colour=(255, 255, 255)):
         # | Call __init__() method of Sprite() to inherit
         pygame.sprite.Sprite.__init__(self)
 
@@ -17,6 +17,8 @@ class Paddle(pygame.sprite.Sprite):
         self.rect = pygame.Rect(xPos, yPos, 15, 90)
         self.rect.centerx = xPos
         self.rect.centery = yPos
+
+        self.windowHeight = windowHeight
 
         self.colour = colour
 
@@ -35,11 +37,13 @@ class Paddle(pygame.sprite.Sprite):
     # | Moves the paddle up
     # |------------------
     def moveUp(self):
-        self.rect.y -= self.yVelocity
+        if self.rect.top > 0:
+            self.rect.y -= self.yVelocity
 
     # | moveDown()
     # |------------------------
     # | Moves the paddle down
     # |--------------------
     def moveDown(self):
-        self.rect.y += self.yVelocity
+        if self.rect.bottom < self.windowHeight:
+            self.rect.y += self.yVelocity

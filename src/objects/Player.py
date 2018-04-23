@@ -1,5 +1,7 @@
 #CK
 
+import pygame
+
 # | Player()
 # |-------------------------------------------------------------------
 # | The player class. Takes care of the player's score, and score
@@ -26,6 +28,14 @@ class Player():
     # |-------------------------------------
     def updateScoreTitle(self):
         self.scoreTitle.changeText(str(self.score))
+
+    # | movePaddle()
+    # |--------------------------------
+    # | Placeholder for methods in
+    # | the inherited objects.
+    # |-------------------
+    def movePaddle(self):
+        pass
 
     # | movePaddleUp()
     # |--------------------------------

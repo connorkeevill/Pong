@@ -1,5 +1,6 @@
 # CK
 
+from objects.Title import Title
 import pygame
 import Helpers
 
@@ -11,7 +12,7 @@ pygame.init()
 # | colours, text, drawing, hovering and clicks
 # |--------------------------------------
 class Button():
-    def __init__(self, xPos, yPos, dimensions, colour, hoverColour, text=False, textColour=(255, 255, 255)):
+    def __init__(self, xPos, yPos, dimensions, colour, hoverColour, text="", textSize=15, textColour=(255, 255, 255)):
         # | Create rect and position button
         self.rect = pygame.Rect(xPos, yPos, dimensions["width"], dimensions["height"])
         self.rect.centerx = xPos
@@ -23,8 +24,7 @@ class Button():
         self.drawColour = colour
 
         # | Define text stuff
-        self.textColour = textColour
-        self.text = Helpers.createText(text, 15, self.textColour)
+        self.text = Title(xPos, yPos, text, 30, textColour)
 
         # | Instantiate needed attributes for button
         self.isHovering = False
@@ -37,7 +37,7 @@ class Button():
     # |---------------------------------------------------------------
     def draw(self, surface):
         pygame.draw.rect(surface, self.drawColour, self.rect)
-        surface.blit(self.text, (self.rect.x, self.rect.y))
+        self.text.draw(surface)
 
     # | hover()
     # |-------------------------------------------------

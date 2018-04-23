@@ -19,7 +19,8 @@ FPS = 60
 clock = pygame.time.Clock()
 
 pages = {"MainMenu": MainMenu(screen),
-         "GamePlay": GamePlay(screen)}
+         "OnePlayerGame": GamePlay(screen, 1),
+         "TwoPlayerGame": GamePlay(screen, 2)}
 
 page = pages["MainMenu"]
 
@@ -31,8 +32,9 @@ while True:
 
     for event in pygame.event.get():
         action = page.handleEvent(event)
-        if action == "GamePlay":
-            print("Change")
+        if action == "OnePlayerGame":
+            page = pages[action]
+        elif action == "TwoPlayerGame":
             page = pages[action]
 
         Helpers.checkForQuit(event)
