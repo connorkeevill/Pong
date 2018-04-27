@@ -47,3 +47,6 @@ class Paddle(pygame.sprite.Sprite):
     def moveDown(self):
         if self.rect.bottom < self.windowHeight:
             self.rect.y += self.yVelocity
+
+    def setVelocity(self, newVelocity):
+        self.yVelocity = newVelocity

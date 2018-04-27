@@ -19,11 +19,12 @@ pygame.mixer.init()
 currentPath = os.path.dirname(os.path.realpath(__file__))
 
 class GamePlay(Page):
-    def __init__(self, surface, playerAmount):
+    def __init__(self, surface, playerAmount, AISpeed=-1):
         # | Call the superclass __init__() method
         Page.__init__(self, surface)
 
         self.bounceSound = pygame.mixer.Sound(os.path.join(currentPath, r"..\resources\ball hit paddle.wav"))
+        self.AISpeed = AISpeed
 
         # | ball
         # |-------
@@ -70,6 +71,7 @@ class GamePlay(Page):
         # |-------------
         if playerAmount == 1:
             self.leftPlayer = ComputerPlayer(self.leftPaddle, self.leftTitle, self.ball)
+            self.leftPlayer.paddle.setVelocity(self.AISpeed)
         elif playerAmount == 2:
             leftPlayerUpKey = pygame.K_a
             leftPlayerDownKey = pygame.K_z
@@ -106,7 +108,7 @@ class GamePlay(Page):
         self.ballOnScreenNeedsToBeChecked = True
 
         # | The delay for the ball to be recentred in the screen after leaving (in seconds)
-        self.ballCentreTimer = 0.3
+        self.ballCentreTimer = 0.5
 
         self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle,
                            self.leftTitle, self.rightTitle, self.verticalLine])

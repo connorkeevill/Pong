@@ -5,9 +5,10 @@ import Helpers
 from resources import colours
 from pages.MainMenu import MainMenu
 from pages.GamePlay import GamePlay
+from pages.Difficulty import Difficulty
 import os
 
-os.environ['SDL_VIDEO_CENTERED'] = '1' # | This centers the window
+os.environ['SDL_VIDEO_CENTERED'] = '1'  # | This centers the window
 pygame.init()
 
 screenWidth = 900
@@ -19,7 +20,10 @@ FPS = 60
 clock = pygame.time.Clock()
 
 pages = {"MainMenu": MainMenu(screen),
-         "OnePlayerGame": GamePlay(screen, 1),
+         "Difficulty": Difficulty(screen),
+         "OnePlayerGameEasy": GamePlay(screen, 1, 5),
+         "OnePlayerGameMedium": GamePlay(screen, 1, 8),
+         "OnePlayerGameHard": GamePlay(screen, 1, 10),
          "TwoPlayerGame": GamePlay(screen, 2)}
 
 page = pages["MainMenu"]
@@ -32,9 +36,9 @@ while True:
 
     for event in pygame.event.get():
         action = page.handleEvent(event)
-        if action == "OnePlayerGame":
-            page = pages[action]
-        elif action == "TwoPlayerGame":
+
+
+        if action in pages:
             page = pages[action]
 
         Helpers.checkForQuit(event)

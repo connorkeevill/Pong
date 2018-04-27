@@ -24,7 +24,7 @@ class Button():
         self.drawColour = colour
 
         # | Define text stuff
-        self.text = Title(xPos, yPos, text, 30, textColour)
+        self.text = Title(xPos, yPos, text, textSize, textColour)
 
         # | Instantiate needed attributes for button
         self.isHovering = False

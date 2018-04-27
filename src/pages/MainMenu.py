@@ -20,14 +20,26 @@ class MainMenu(Page):
         btnOnePlayerDimensions = {"width":250, "height":100}
         btnOneplayerXpos = 300
         btnOnePlayerYpos = 400
-        self.btnOnePlayer = Button(btnOneplayerXpos, btnOnePlayerYpos, btnOnePlayerDimensions, colours.red, colours.blue, "One Player", 28, colours.black)
+        btnOnePlayerColour = colours.red
+        btnOnePlayerHoverColour = colours.blue
+        btnOnePlayerText = "One player"
+        btnOnePlayerTextSize = 28
+        btnOnePlayerTextColour = colours.black
+        self.btnOnePlayer = Button(btnOneplayerXpos, btnOnePlayerYpos, btnOnePlayerDimensions, btnOnePlayerColour,
+                                   btnOnePlayerHoverColour, btnOnePlayerText, btnOnePlayerTextSize, btnOnePlayerTextColour)
 
         # | btnTwoPlayer
         # |----------
         btnTwoPlayerDimensions = {"width":250, "height":100}
-        btnTwoPlayerXpos = 650
+        btnTwoPlayerXpos = 600
         btnTwoPlayerYpos = 400
-        self.btnTwoPlayer = Button(btnTwoPlayerXpos, btnTwoPlayerYpos, btnTwoPlayerDimensions, colours.red, colours.blue, "Two player", 28, colours.black)
+        btnTwoPlayerColour = colours.red
+        btnTwoPlayerHoverColour = colours.blue
+        btnTwoPlayerText = "Two player"
+        btnTwoPlayerTextSize = 28
+        btnTwoPlayerTextColour = colours.black
+        self.btnTwoPlayer = Button(btnTwoPlayerXpos, btnTwoPlayerYpos, btnTwoPlayerDimensions, btnTwoPlayerColour,
+                                   btnTwoPlayerHoverColour, btnTwoPlayerText, btnTwoPlayerTextSize, btnTwoPlayerTextColour)
 
         # | ttlPong
         # |----------
@@ -51,7 +63,7 @@ class MainMenu(Page):
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if self.btnOnePlayer.clicked():
-                action = "OnePlayerGame"
+                action = "Difficulty"
             elif self.btnTwoPlayer.clicked():
                 action = "TwoPlayerGame"
 
