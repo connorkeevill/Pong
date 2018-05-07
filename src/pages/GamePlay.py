@@ -98,9 +98,6 @@ class GamePlay(Page):
         # | whether or not the paddles need to be moves - helps to improve performance.
         self.keysPressed = 0
 
-        # | The title to be shown when a someone wins
-        self.congratulationsTitle = None
-
         # | The score needed to win
         self.winScore = 10
 
@@ -330,17 +327,27 @@ class GamePlay(Page):
     def showWinMessage(self, player):
         self.ball.xVelocity = 0
         self.ball.yVelocity = 0
+        side = ""
 
         # | congratulationsTitle
         # |-----------------------
         congratulationsTitleXpos = 0
-        if player == self.leftPlayer: congratulationsTitleXpos = 450   # | Eventually will be able to differentiate between
-        elif player == self.rightPlayer: congratulationsTitleXpos = 450# | sides, and move the message to a differnt side
-        congratulationsTitleYpos = Helpers.midpoint(0, self.surface.get_height()) - 70
-        congratulationsTitleText = "Conrgatulations! You won!"
+        if player == self.leftPlayer:
+            congratulationsTitleXpos = 1/4 * (self.surface.get_width())
+            side = "left"
+        elif player == self.rightPlayer:
+            congratulationsTitleXpos = 3/4 * (self.surface.get_width())
+            side = "right"
+        congratulationsTitleLineOneYpos = Helpers.midpoint(0, self.surface.get_height()) - 70
+        congratulationsTitleLineTwoYpos = Helpers.midpoint(0, self.surface.get_height()) - 30
+        congratulationsTitleLineOneText = "The " + side
+        congratulationsTitleLineTwoText = "player won!"
         congratulationsTitleSize = 55
         congratulationsTitleColour = colours.red
-        self.congratulationsTitle = Title(congratulationsTitleXpos, congratulationsTitleYpos, congratulationsTitleText,
+        congratulationsTitleLineOne = Title(congratulationsTitleXpos, congratulationsTitleLineOneYpos, congratulationsTitleLineOneText,
                                           congratulationsTitleSize, congratulationsTitleColour)
+        congratulationsTitleLineTwo = Title(congratulationsTitleXpos, congratulationsTitleLineTwoYpos,
+                                            congratulationsTitleLineTwoText,
+                                            congratulationsTitleSize, congratulationsTitleColour)
 
-        self.addToObjects(self.congratulationsTitle)
+        self.addToObjects([congratulationsTitleLineOne, congratulationsTitleLineTwo])

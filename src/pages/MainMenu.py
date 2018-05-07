@@ -16,7 +16,7 @@ class MainMenu(Page):
         Page.__init__(self, surface)
 
         # | btnOnePlayer
-        # |-----------
+        # |---------------
         btnOnePlayerDimensions = {"width":250, "height":100}
         btnOneplayerXpos = 300
         btnOnePlayerYpos = 400
@@ -29,7 +29,7 @@ class MainMenu(Page):
                                    btnOnePlayerHoverColour, btnOnePlayerText, btnOnePlayerTextSize, btnOnePlayerTextColour)
 
         # | btnTwoPlayer
-        # |----------
+        # |---------------
         btnTwoPlayerDimensions = {"width":250, "height":100}
         btnTwoPlayerXpos = 600
         btnTwoPlayerYpos = 400
