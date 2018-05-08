@@ -157,7 +157,7 @@ class GamePlay(Page):
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if self.btnPause.clicked():
-                action = 'pause'
+                action = 'Pause'
 
         return action
 

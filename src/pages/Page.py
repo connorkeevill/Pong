@@ -14,12 +14,16 @@ class Page():
 
     # | draw()
     # |--------------------------------------------
-    # | Draws each item in the page's object list
+    # | Clears the screen, and draws all objects
     # |---------------------------------------
     def draw(self):
         self.surface.fill(colours.black)
         self.drawObjects()
 
+    # | drawObjects()
+    # |--------------------------------------------
+    # | Draws each item in the page's object list
+    # |----------------------------------------
     def drawObjects(self):
         for object in self.objects:
             object.draw(self.surface)

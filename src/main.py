@@ -26,7 +26,7 @@ pages = {"MainMenu": MainMenu(screen),
          "OnePlayerGameMedium": GamePlay(screen, 1, 8),
          "OnePlayerGameHard": GamePlay(screen, 1, 10),
          "TwoPlayerGame": GamePlay(screen, 2),
-         "pause": Pause(screen)}
+         "Pause": Pause(screen)}
 
 page = pages["MainMenu"]
 pageToResume = None
@@ -39,10 +39,11 @@ while True:
         action = page.handleEvent(event)
 
         if action in pages:
-            if action == 'pause':
+            if action == 'Pause':
                 pageToResume = page
-                print(pageToResume)
             page = pages[action]
+        elif action == 'Resume':
+            page = pageToResume
 
         Helpers.checkForQuit(event)
 
