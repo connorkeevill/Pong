@@ -2,7 +2,7 @@
 
 import pygame
 import Helpers
-from resources import colours
+from Router import Router
 from pages.MainMenu import MainMenu
 from pages.GamePlay import GamePlay
 from pages.Difficulty import Difficulty
@@ -20,15 +20,18 @@ pygame.display.set_caption("Pong")
 FPS = 60
 clock = pygame.time.Clock()
 
-pages = {"MainMenu": MainMenu(screen),
-         "Difficulty": Difficulty(screen),
-         "OnePlayerGameEasy": GamePlay(screen, 1, 5),
-         "OnePlayerGameMedium": GamePlay(screen, 1, 8),
-         "OnePlayerGameHard": GamePlay(screen, 1, 10),
-         "TwoPlayerGame": GamePlay(screen, 2),
-         "Pause": Pause(screen)}
+pages = ["MainMenu",
+         "Difficulty",
+         "OnePlayerGameEasy",
+         "OnePlayerGameMedium",
+         "OnePlayerGameHard",
+         "TwoPlayerGame",
+         "Pause"]
 
-page = pages["MainMenu"]
+
+router = Router(screen)
+
+page = router.route('MainMenu')
 pageToResume = None
 
 while True:
@@ -38,10 +41,13 @@ while True:
     for event in pygame.event.get():
         action = page.handleEvent(event)
 
+        # | If the action is to change page
         if action in pages:
             if action == 'Pause':
                 pageToResume = page
-            page = pages[action]
+
+            page = router.route(action)
+        # | If we are resuming from a pause
         elif action == 'Resume':
             page = pageToResume
 
