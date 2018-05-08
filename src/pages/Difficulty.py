@@ -18,11 +18,11 @@ class Difficulty(Page):
         btnEasyDimensions = {'width':400, 'height':100}
         btnEasyXpos = 450
         btnEasyYpos = 200
-        btnEasyColour = colours.red
-        btnEasyHoverColour = colours.blue
+        btnEasyColour = colours.btnPrimary
+        btnEasyHoverColour = colours.btnHover
         btnEasyText = "Easy"
         btnEasyTextSize = 30
-        btnEasyTextColour = colours.black
+        btnEasyTextColour = colours.btnText
         self.btnEasy = Button(btnEasyXpos, btnEasyYpos, btnEasyDimensions, btnEasyColour, btnEasyHoverColour,
                               btnEasyText, btnEasyTextSize, btnEasyTextColour)
 
@@ -31,11 +31,11 @@ class Difficulty(Page):
         btnMediumDimensions = {'width':400, 'height':100}
         btnMediumXpos = 450
         btnMediumYpos = 320
-        btnMediumColour = colours.red
-        btnMediumHoverColour = colours.blue
+        btnMediumColour = colours.btnPrimary
+        btnMediumHoverColour = colours.btnHover
         btnMediumText = "Medium"
         btnMediumTextSize = 30
-        btnMediumTextColour = colours.black
+        btnMediumTextColour = colours.btnText
         self.btnMedium = Button(btnMediumXpos, btnMediumYpos, btnMediumDimensions, btnMediumColour, btnMediumHoverColour,
                                 btnMediumText, btnMediumTextSize, btnMediumTextColour)
 
@@ -44,11 +44,11 @@ class Difficulty(Page):
         btnHardDimensions = {'width': 400, 'height': 100}
         btnHardXpos = 450
         btnHardYpos = 440
-        btnHardColour = colours.red
-        btnHardHoverColour = colours.blue
+        btnHardColour = colours.btnPrimary
+        btnHardHoverColour = colours.btnHover
         btnHardText = "Hard"
         btnHardTextSize = 30
-        btnHardTextColour = colours.black
+        btnHardTextColour = colours.btnText
         self.btnHard = Button(btnHardXpos, btnHardYpos, btnHardDimensions, btnHardColour, btnHardHoverColour,
                                 btnHardText, btnHardTextSize, btnHardTextColour)
 
@@ -57,14 +57,13 @@ class Difficulty(Page):
         btnBackDimensions = {'width': 50, 'height': 20}
         btnBackXpos = 35
         btnBackYpos = 20
-        btnBackColour = colours.red
-        btnBackHoverColour = colours.blue
+        btnBackColour = colours.btnPrimary
+        btnBackHoverColour = colours.btnHover
         btnBackText = "Back"
         btnBackTextSize = 19
-        btnBackTextColour = colours.black
+        btnBackTextColour = colours.btnText
         self.btnBack = Button(btnBackXpos, btnBackYpos, btnBackDimensions, btnBackColour, btnBackHoverColour,
                               btnBackText, btnBackTextSize, btnBackTextColour)
-
 
         self.addToObjects([self.btnEasy, self.btnMedium, self.btnHard, self.btnBack])
 

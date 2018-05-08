@@ -100,11 +100,11 @@ class GamePlay(Page):
         btnPauseDimensions = {'width':40, 'height':40}
         btnPauseXpos = self.surface.get_width() / 2
         btnPauseYpos = 30
-        btnPauseColour = colours.grey
-        btnPauseHoverColour = colours.lightGrey
+        btnPauseColour = colours.btnPrimary
+        btnPauseHoverColour = colours.btnHover
         btnPauseText = '||'
         btnPauseTextSize = 30
-        btnPauseTextColour = colours.white
+        btnPauseTextColour = colours.btnText
         self.btnPause = Button(btnPauseXpos, btnPauseYpos, btnPauseDimensions, btnPauseColour, btnPauseHoverColour,
                                btnPauseText, btnPauseTextSize, btnPauseTextColour)
 

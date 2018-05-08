@@ -18,11 +18,11 @@ class Pause(Page):
         btnResumeDimensions = {'width':450, 'height':100}
         btnResumeXpos = self.surface.get_width() / 2
         btnResumeYpos = 200
-        btnResumeColour = colours.grey
-        btnResumeHoverColour = colours.lightGrey
+        btnResumeColour = colours.btnPrimary
+        btnResumeHoverColour = colours.btnHover
         btnResumeText = "Resume"
         btnResumeTextSize = 35
-        btnResumeTextColour = colours.white
+        btnResumeTextColour = colours.btnText
         self.btnResume = Button(btnResumeXpos, btnResumeYpos, btnResumeDimensions, btnResumeColour, btnResumeHoverColour,
                            btnResumeText, btnResumeTextSize, btnResumeTextColour)
 
@@ -31,11 +31,11 @@ class Pause(Page):
         btnQuitDimensions = {'width': 450, 'height': 100}
         btnQuitXpos = self.surface.get_width() / 2
         btnQuitYpos = 350
-        btnQuitColour = colours.grey
-        btnQuitHoverColour = colours.lightGrey
+        btnQuitColour = colours.btnPrimary
+        btnQuitHoverColour = colours.btnHover
         btnQuitText = "Quit"
         btnQuitTextSize = 35
-        btnQuitTextColour = colours.white
+        btnQuitTextColour = colours.btnText
         self.btnQuit = Button(btnQuitXpos, btnQuitYpos, btnQuitDimensions, btnQuitColour, btnQuitHoverColour,
                               btnQuitText, btnQuitTextSize, btnQuitTextColour)
 

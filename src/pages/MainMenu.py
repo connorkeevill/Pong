@@ -19,11 +19,11 @@ class MainMenu(Page):
         btnOnePlayerDimensions = {"width":250, "height":100}
         btnOneplayerXpos = 300
         btnOnePlayerYpos = 400
-        btnOnePlayerColour = colours.red
-        btnOnePlayerHoverColour = colours.blue
+        btnOnePlayerColour = colours.btnPrimary
+        btnOnePlayerHoverColour = colours.btnHover
         btnOnePlayerText = "One player"
         btnOnePlayerTextSize = 28
-        btnOnePlayerTextColour = colours.black
+        btnOnePlayerTextColour = colours.btnText
         self.btnOnePlayer = Button(btnOneplayerXpos, btnOnePlayerYpos, btnOnePlayerDimensions, btnOnePlayerColour,
                                    btnOnePlayerHoverColour, btnOnePlayerText, btnOnePlayerTextSize, btnOnePlayerTextColour)
 
@@ -32,11 +32,11 @@ class MainMenu(Page):
         btnTwoPlayerDimensions = {"width":250, "height":100}
         btnTwoPlayerXpos = 600
         btnTwoPlayerYpos = 400
-        btnTwoPlayerColour = colours.red
-        btnTwoPlayerHoverColour = colours.blue
+        btnTwoPlayerColour = colours.btnPrimary
+        btnTwoPlayerHoverColour = colours.btnHover
         btnTwoPlayerText = "Two player"
         btnTwoPlayerTextSize = 28
-        btnTwoPlayerTextColour = colours.black
+        btnTwoPlayerTextColour = colours.btnText
         self.btnTwoPlayer = Button(btnTwoPlayerXpos, btnTwoPlayerYpos, btnTwoPlayerDimensions, btnTwoPlayerColour,
                                    btnTwoPlayerHoverColour, btnTwoPlayerText, btnTwoPlayerTextSize, btnTwoPlayerTextColour)
 

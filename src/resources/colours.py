@@ -8,3 +8,8 @@ green = (0, 255, 0)
 blue = (0, 0, 255)
 grey = (50, 50, 50)
 lightGrey = (100, 100, 100)
+
+# | Important colours
+btnPrimary = grey
+btnHover = lightGrey
+btnText = white
