@@ -5,7 +5,6 @@ import pygame
 from objects.Button import Button
 from objects.Title import Title
 from resources import colours
-
 from pages.Page import Page
 
 pygame.init()

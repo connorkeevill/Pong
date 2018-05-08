@@ -1,5 +1,7 @@
 #CK
 
+from resources import colours
+
 # | Page()
 # |------------------------------------------
 # | Parent class for each page of the game
@@ -15,6 +17,10 @@ class Page():
     # | Draws each item in the page's object list
     # |---------------------------------------
     def draw(self):
+        self.surface.fill(colours.black)
+        self.drawObjects()
+
+    def drawObjects(self):
         for object in self.objects:
             object.draw(self.surface)
 

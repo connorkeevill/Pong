@@ -6,6 +6,7 @@ from resources import colours
 from pages.MainMenu import MainMenu
 from pages.GamePlay import GamePlay
 from pages.Difficulty import Difficulty
+from pages.Pause import Pause
 import os
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'  # | This centers the window
@@ -24,21 +25,23 @@ pages = {"MainMenu": MainMenu(screen),
          "OnePlayerGameEasy": GamePlay(screen, 1, 5),
          "OnePlayerGameMedium": GamePlay(screen, 1, 8),
          "OnePlayerGameHard": GamePlay(screen, 1, 10),
-         "TwoPlayerGame": GamePlay(screen, 2)}
+         "TwoPlayerGame": GamePlay(screen, 2),
+         "pause": Pause(screen)}
 
 page = pages["MainMenu"]
+pageToResume = None
 
 while True:
-    screen.fill(colours.black)
-
     page.update()
     page.draw()
 
     for event in pygame.event.get():
         action = page.handleEvent(event)
 
-
         if action in pages:
+            if action == 'pause':
+                pageToResume = page
+                print(pageToResume)
             page = pages[action]
 
         Helpers.checkForQuit(event)

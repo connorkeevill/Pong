@@ -10,6 +10,7 @@ from objects.Title import Title
 from objects.HumanPlayer import HumanPlayer
 from objects.ComputerPlayer import ComputerPlayer
 from objects.VerticalLine import VerticalLine
+from objects.Button import Button
 from pages.Page import Page
 from resources import colours
 from random import uniform
@@ -94,6 +95,19 @@ class GamePlay(Page):
         self.verticalLine = VerticalLine(verticalLineXpos, verticalLineStartPoint, verticalLineEndPoint,
                                          verticalLineSegmentLength, verticalLineInterval, verticalLineColour)
 
+        # | btnPause
+        # |--------------
+        btnPauseDimensions = {'width':40, 'height':40}
+        btnPauseXpos = self.surface.get_width() / 2
+        btnPauseYpos = 30
+        btnPauseColour = colours.grey
+        btnPauseHoverColour = colours.lightGrey
+        btnPauseText = '||'
+        btnPauseTextSize = 30
+        btnPauseTextColour = colours.white
+        self.btnPause = Button(btnPauseXpos, btnPauseYpos, btnPauseDimensions, btnPauseColour, btnPauseHoverColour,
+                               btnPauseText, btnPauseTextSize, btnPauseTextColour)
+
         # | Integer to keep track of the number of keys that are being pressed, to indicate
         # | whether or not the paddles need to be moves - helps to improve performance.
         self.keysPressed = 0
@@ -108,7 +122,8 @@ class GamePlay(Page):
         self.ballCentreTimer = 0.5
 
         self.addToObjects([self.ball, self.leftPaddle, self.rightPaddle,
-                           self.leftTitle, self.rightTitle, self.verticalLine])
+                           self.leftTitle, self.rightTitle, self.verticalLine,
+                           self.btnPause])
 
     # | update()
     # |--------------------------------------------------
@@ -135,6 +150,14 @@ class GamePlay(Page):
     # |---------------------------------------------------------------
     def handleEvent(self, event):
         action = None
+
+        if event.type == pygame.MOUSEMOTION:
+            xMouse, yMouse = pygame.mouse.get_pos()
+            self.btnPause.hover(xMouse, yMouse)
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if self.btnPause.clicked():
+                action = 'pause'
 
         return action
 
