@@ -1,5 +1,6 @@
 #CK
 
+import pygame
 from resources import colours
 
 # | Page()
@@ -11,6 +12,7 @@ class Page():
         self.surface = surface
 
         self.objects = []
+        self.buttons = []
 
     # | draw()
     # |--------------------------------------------
@@ -48,6 +50,16 @@ class Page():
     def handleEvent(self, event):
         action = None
 
+        if event.type == pygame.MOUSEMOTION:
+            xMouse, yMouse = pygame.mouse.get_pos()
+            for button in self.buttons:
+                button.hover(xMouse, yMouse)
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            for button in self.buttons:
+                if button.clicked():
+                    action = button.getAction()
+
         return action
 
     # | addToObjects()
@@ -60,6 +72,17 @@ class Page():
         else:
             for object in objects:
                 self.objects.append(object)
+
+    # | addToButtons()
+    # |------------------------------------------
+    # | Adds buttons to the page's buttons list
+    # |-------------------------------------
+    def addToButtons(self, buttons):
+        if type(buttons) != list:
+            self.buttons.append(buttons)
+        else:
+            for button in buttons:
+                self.buttons.append(button)
 
 
 

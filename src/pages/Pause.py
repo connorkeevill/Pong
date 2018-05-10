@@ -20,11 +20,12 @@ class Pause(Page):
         btnResumeYpos = 200
         btnResumeColour = colours.btnPrimary
         btnResumeHoverColour = colours.btnHover
+        btnResumeAction = "Resume"
         btnResumeText = "Resume"
         btnResumeTextSize = 35
         btnResumeTextColour = colours.btnText
         self.btnResume = Button(btnResumeXpos, btnResumeYpos, btnResumeDimensions, btnResumeColour, btnResumeHoverColour,
-                           btnResumeText, btnResumeTextSize, btnResumeTextColour)
+                                btnResumeAction, btnResumeText, btnResumeTextSize, btnResumeTextColour)
 
         # | btnQuit
         # |----------
@@ -33,33 +34,15 @@ class Pause(Page):
         btnQuitYpos = 350
         btnQuitColour = colours.btnPrimary
         btnQuitHoverColour = colours.btnHover
+        btnQuitAction = "MainMenu"
         btnQuitText = "Quit"
         btnQuitTextSize = 35
         btnQuitTextColour = colours.btnText
         self.btnQuit = Button(btnQuitXpos, btnQuitYpos, btnQuitDimensions, btnQuitColour, btnQuitHoverColour,
-                              btnQuitText, btnQuitTextSize, btnQuitTextColour)
+                              btnQuitAction, btnQuitText, btnQuitTextSize, btnQuitTextColour)
 
         self.addToObjects([self.btnResume, self.btnQuit])
-
-    # | handleEvent()
-    # |---------------------------------------------------------------------
-    # | Takes an event to determine what action can be taken to handle it
-    # |---------------------------------------------------------------
-    def handleEvent(self, event):
-        action = None
-
-        if event.type == pygame.MOUSEMOTION:
-            xMouse, yMouse = pygame.mouse.get_pos()
-            self.btnResume.hover(xMouse, yMouse)
-            self.btnQuit.hover(xMouse, yMouse)
-
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if self.btnResume.clicked():
-                action = "Resume"
-            elif self.btnQuit.clicked():
-                action = "MainMenu"
-
-        return action
+        self.addToButtons([self.btnResume, self.btnQuit])
 
     # | draw()
     # |-----------------------------------------------------

@@ -12,7 +12,7 @@ pygame.init()
 # | colours, text, drawing, hovering and clicks
 # |--------------------------------------
 class Button():
-    def __init__(self, xPos, yPos, dimensions, colour, hoverColour, text="", textSize=15, textColour=(255, 255, 255)):
+    def __init__(self, xPos, yPos, dimensions, colour, hoverColour, action, text="", textSize=15, textColour=(255, 255, 255)):
         # | Create rect and position button
         self.rect = pygame.Rect(xPos, yPos, dimensions["width"], dimensions["height"])
         self.rect.centerx = xPos
@@ -22,6 +22,9 @@ class Button():
         self.colour = colour
         self.hoverColour = hoverColour
         self.drawColour = colour
+
+        # | Define the action
+        self.action = action
 
         # | Define text stuff
         self.text = Title(xPos, yPos, text, textSize, textColour)
@@ -52,7 +55,14 @@ class Button():
         else:
             self.drawColour = self.colour
 
-    # | click()
+    # | getAction()
+    # |------------------------------------
+    # | Returns the action of the button
+    # |-------------------------------
+    def getAction(self):
+        return self.action
+
+    # | clicked()
     # |-------------------------------------------------
     # | Uses the isHovering flag from self.hover() to
     # | determine if a click was above the button
