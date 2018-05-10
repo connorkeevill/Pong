@@ -337,15 +337,18 @@ class GamePlay(Page):
         self.ball.yVelocity = 0
         side = ""
 
-        # | congratulationsTitle
-        # |-----------------------
         congratulationsTitleXpos = 0
         if player == self.leftPlayer:
             congratulationsTitleXpos = 1/4 * (self.surface.get_width())
+            btnXpos = 3/4 * (self.surface.get_width())
             side = "left"
         elif player == self.rightPlayer:
             congratulationsTitleXpos = 3/4 * (self.surface.get_width())
+            btnXpos = 1/4 * (self.surface.get_width())
             side = "right"
+
+        # | congratulationsTitle
+        # |-----------------------
         congratulationsTitleLineOneYpos = Helpers.midpoint(0, self.surface.get_height()) - 70
         congratulationsTitleLineTwoYpos = Helpers.midpoint(0, self.surface.get_height()) - 30
         congratulationsTitleLineOneText = "The " + side
@@ -358,4 +361,31 @@ class GamePlay(Page):
                                             congratulationsTitleLineTwoText,
                                             congratulationsTitleSize, congratulationsTitleColour)
 
-        self.addToObjects([congratulationsTitleLineOne, congratulationsTitleLineTwo])
+        # | btnMainMenu
+        # |--------------
+        btnMainMenuYpos = Helpers.midpoint(0, self.surface.get_height()) - 70
+        btnMainMenuDimensions = {'height':75, 'width':250}
+        btnMainMenuColour = colours.btnPrimary
+        btnMainMenuHoverColour = colours.btnHover
+        btnMainMenuAction = "MainMenu"
+        btnMainMenuText = "Main Menu"
+        btnMainMenuTextSize = 35
+        btnMainMenuTextColour = colours.btnText
+        btnMainMenu = Button(btnXpos, btnMainMenuYpos, btnMainMenuDimensions, btnMainMenuColour, btnMainMenuHoverColour,
+                             btnMainMenuAction, btnMainMenuText, btnMainMenuTextSize, btnMainMenuTextColour)
+
+        # | btnPlayAgain
+        # |---------------
+        btnPlayAgainYpos = Helpers.midpoint(0, self.surface.get_height()) + 70
+        btnPlayAgainDimensions = {'height': 75, 'width': 250}
+        btnPlayAgainColour = colours.btnPrimary
+        btnPlayAgainHoverColour = colours.btnHover
+        btnPlayAgainAction = self.pageName
+        btnPlayAgainText = "Play again"
+        btnPlayAgainTextSize = 35
+        btnPlayAgainTextColour = colours.btnText
+        btnPlayAgain = Button(btnXpos, btnPlayAgainYpos, btnPlayAgainDimensions, btnPlayAgainColour, btnPlayAgainHoverColour,
+                              btnPlayAgainAction, btnPlayAgainText, btnPlayAgainTextSize, btnPlayAgainTextColour)
+
+        self.addToObjects([congratulationsTitleLineOne, congratulationsTitleLineTwo, btnMainMenu, btnPlayAgain])
+        self.addToButtons([btnMainMenu, btnPlayAgain])

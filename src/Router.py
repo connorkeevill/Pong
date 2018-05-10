@@ -33,14 +33,14 @@ class Router:
     # | Returns a new instance of MainMenu
     # |-------------------------------
     def createMainMenu(self):
-        return MainMenu(self.screen, self.route)
+        return MainMenu(self.screen, self.page)
 
     # | createDifficulty()
     # |----------------------------------------
     # | Returns a new instance of Difficulty
     # |---------------------------------
     def createDifficulty(self):
-        return Difficulty(self.screen, self.route)
+        return Difficulty(self.screen, self.page)
 
     # | createOnePlayerEasy()
     # |-------------------------------------------
@@ -48,7 +48,7 @@ class Router:
     # | is set for one player, and a slow AI
     # |---------------------------------
     def createOnePlayerEasy(self):
-        return GamePlay(self.screen, self.route, 1, 5)
+        return GamePlay(self.screen, self.page, 1, 5)
 
     # | createOnePlayerMedium()
     # |--------------------------------------------
@@ -56,7 +56,7 @@ class Router:
     # | is set for one player, and a medium AI
     # |------------------------------------
     def createOnePlayerMedium(self):
-        return GamePlay(self.screen, self.route, 1, 8)
+        return GamePlay(self.screen, self.page, 1, 8)
 
     # | createOnePlayerHard()
     # |-------------------------------------------
@@ -64,7 +64,7 @@ class Router:
     # | is set for one player and a fast AI
     # |-------------------------------
     def createOnePlayerHard(self):
-        return GamePlay(self.screen, self.route, 1, 10)
+        return GamePlay(self.screen, self.page, 1, 10)
 
     # | createTwoPlayer()
     # |---------------------------------------
@@ -72,11 +72,11 @@ class Router:
     # | that is set for two player mode
     # |---------------------------
     def createTwoPlayer(self):
-        return GamePlay(self.screen, self.route, 2)
+        return GamePlay(self.screen, self.page, 2)
 
     # | createPause()
     # |----------------------------------
     # | Returns a new instance of Pause
     # |------------------------------
     def createPause(self):
-        return Pause(self.screen, self.route)
+        return Pause(self.screen, self.page)
