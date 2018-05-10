@@ -9,6 +9,7 @@ from pages.Pause import Pause
 class Router:
     def __init__(self, screen):
         self.screen = screen
+        self.page = None
 
         self.routes = {"MainMenu": self.createMainMenu,
                        "Difficulty": self.createDifficulty,
@@ -24,6 +25,7 @@ class Router:
     # | the route that was passed into the method
     # |-------------------------------------
     def route(self, route):
+        self.page = route
         return self.routes[route]()
 
     # | createMainMenu()
@@ -31,14 +33,14 @@ class Router:
     # | Returns a new instance of MainMenu
     # |-------------------------------
     def createMainMenu(self):
-        return MainMenu(self.screen)
+        return MainMenu(self.screen, self.route)
 
     # | createDifficulty()
     # |----------------------------------------
     # | Returns a new instance of Difficulty
     # |---------------------------------
     def createDifficulty(self):
-        return Difficulty(self.screen)
+        return Difficulty(self.screen, self.route)
 
     # | createOnePlayerEasy()
     # |-------------------------------------------
@@ -46,7 +48,7 @@ class Router:
     # | is set for one player, and a slow AI
     # |---------------------------------
     def createOnePlayerEasy(self):
-        return GamePlay(self.screen, 1, 5)
+        return GamePlay(self.screen, self.route, 1, 5)
 
     # | createOnePlayerMedium()
     # |--------------------------------------------
@@ -54,7 +56,7 @@ class Router:
     # | is set for one player, and a medium AI
     # |------------------------------------
     def createOnePlayerMedium(self):
-        return GamePlay(self.screen, 1, 8)
+        return GamePlay(self.screen, self.route, 1, 8)
 
     # | createOnePlayerHard()
     # |-------------------------------------------
@@ -62,7 +64,7 @@ class Router:
     # | is set for one player and a fast AI
     # |-------------------------------
     def createOnePlayerHard(self):
-        return GamePlay(self.screen, 1, 10)
+        return GamePlay(self.screen, self.route, 1, 10)
 
     # | createTwoPlayer()
     # |---------------------------------------
@@ -70,11 +72,11 @@ class Router:
     # | that is set for two player mode
     # |---------------------------
     def createTwoPlayer(self):
-        return GamePlay(self.screen, 2)
+        return GamePlay(self.screen, self.route, 2)
 
     # | createPause()
     # |----------------------------------
     # | Returns a new instance of Pause
     # |------------------------------
     def createPause(self):
-        return Pause(self.screen)
+        return Pause(self.screen, self.route)

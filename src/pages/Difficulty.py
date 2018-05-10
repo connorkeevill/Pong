@@ -9,8 +9,8 @@ from resources import colours
 from pages.Page import Page
 
 class Difficulty(Page):
-    def __init__(self, surface):
-        Page.__init__(self, surface)
+    def __init__(self, surface, pageName):
+        Page.__init__(self, surface, pageName)
 
         # | btnEasy
         # |----------

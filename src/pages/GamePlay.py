@@ -20,9 +20,9 @@ pygame.mixer.init()
 currentPath = os.path.dirname(os.path.realpath(__file__))
 
 class GamePlay(Page):
-    def __init__(self, surface, playerAmount, AISpeed=-1):
+    def __init__(self, surface, pageName, playerAmount, AISpeed=-1):
         # | Call the superclass __init__() method
-        Page.__init__(self, surface)
+        Page.__init__(self, surface, pageName)
 
         self.bounceSound = pygame.mixer.Sound(os.path.join(currentPath, r"..\resources\ball hit paddle.wav"))
         self.AISpeed = AISpeed

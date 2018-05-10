@@ -8,8 +8,9 @@ from resources import colours
 # | Parent class for each page of the game
 # |------------------------------------
 class Page():
-    def __init__(self, surface):
+    def __init__(self, surface, pageName):
         self.surface = surface
+        self.pageName = pageName
 
         self.objects = []
         self.buttons = []

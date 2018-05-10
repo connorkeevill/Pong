@@ -7,9 +7,9 @@ from pages.Page import Page
 from objects.Button import Button
 
 class Pause(Page):
-    def __init__(self, surface):
+    def __init__(self, surface, pageName):
         # | Call the superclass __init__() method
-        Page.__init__(self, surface)
+        Page.__init__(self, surface, pageName)
 
         self.backgroundSurface = self.createBackgroundSurface()
 
