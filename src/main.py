@@ -1,13 +1,9 @@
 #CK
 
 import pygame
+import os
 import Helpers
 from Router import Router
-from pages.MainMenu import MainMenu
-from pages.GamePlay import GamePlay
-from pages.Difficulty import Difficulty
-from pages.Pause import Pause
-import os
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'  # | This centers the window
 pygame.init()
